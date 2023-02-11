@@ -1,32 +1,35 @@
 ---
-title: How to Build Car Marketplace dapp Using React
-description: Learn how to build a Car Marketplace on the Celo Blockchain with React as frontend framework
+title: How to Build a seed Marketplace dapp Using Solidity and Javascript on the Celo ecosystem
+description: Learn how to build a seed marketplace on the blockchain using solidity and javascript 
 authors:
-- name: Daniel Ogbuti
-  title: Web3 Developer, 
-  url: https://github.com/dahnny
-  image_url: https://github.com/dahnny.png
-tags: [solidity, react, celo]
+- name: Samson Amos 
+  title: Web2 and Web3 Developer, 
+  github_url: https://github.com/SamsonAmos
+tags: [Solidity, Celo, Javascript]
 hide_table_of_contents: true
-slug: /tutorials/how-to-build-car-marketplace-dapp-with-react
+slug: /tutorials/how-to-build-a-seed-marketplace-dapp-using-Solidity-Celo-and-Javascript
 ---
 
-# How to Build a Car Marketplace dapp using React
+# How to Build a Seed Marketplace dapp using Solidity, Celo and Javascript
 
-## Introduction
+## Introduction:
+A blockchain or cryptographic network is a broad term used to describe a database maintained by a distributed set of computers that do not share a trust relationship or common ownership. This arrangement is referred to as decentralized. The content of a blockchain's database, or ledger, is authenticated using cryptographic techniques, preventing its contents from being added to, edited or removed except according to a protocol operated by the network as a whole.
+
 Celo blockchain enables fast, secure, and low-cost financial transactions. It is built on top of the Ethereum Virtual Machine (EVM), which is a standardized environment for running smart contracts (self-executing code that can be used to facilitate, verify, and enforce the negotiation or performance of a contract). 
 One of the main features of Celo is its use of proof-of-stake (PoS) consensus, which means that the network is secured by a group of "validators" who stake (or pledge) a certain amount of the platform's native cryptocurrency  in order to participate in the validation of transactions. 
 
-## Prerequisites
+Ethereum applications are built using smart contracts. Smart contracts are programs written in languages like Solidity that produce bytecode for the Ethereum Virtual Machine or EVM, a runtime environment. Programs encoded in smart contracts receive messages and manipulate the blockchain ledger and are termed on-chain.
+
+## Prerequisites:
 This tutorials exposes you to how building a simple fullstack dapp (decentralized application) using react. You will need to have familiarity of the following:
 
-- Prior knowledge of javascript
+- Have access to a desktop computer with internet and a chrome web browser.
+- Have basic knowledge of HTML and Javascript.
 - Familiarity with the command line
-- Basic understanding of blockchain concepts
-- Have some knowledge on solidity and its concepts
-- Have a basic understanding of **[React](https://react.org)**. Knowledge on JSX, props, state and hooks.
+- Basic understanding of blockchain concepts. You can click **[here](https://dacade.org/communities/blockchain/courses/intro-to-blockchain) to learn.
+- Have some knowledge on solidity and its concepts. you can click **[here](https://dacade.org/communities/ethereum/courses/sol-101/learning-modules/dcc5e8e2-bc22-49a6-ace7-23ec7fcc81d5) to learn
 
-## Requirements
+## Requirements: 
 - **[NodeJS](https://nodejs.org/en/download)** from V12.or higher
 - A code editor or text editor. **[VSCode](https://code.visualstudio.com/download)** is recommended
 - A terminal. **[Git Bash](https://git-scm.com/downloads)** is recommended
@@ -36,23 +39,33 @@ This tutorials exposes you to how building a simple fullstack dapp (decentralize
 
 ## Let's Begin
 
-Here is a screenshot of what our dapp would look like
+Below is a gif image of what we are about to build on the celo ecosystem.
 
 ![image](images/1.png)
 
-_In this tutorial, I have the assumption that the person following has a basic understanding of React and has react already downloaded and fully setup. If you don't, I would highly suggest you have a grasp of React. You can start **[here](https://reactjs.org/docs/getting-started.html)**._
-
 ## Smart Contract Development
 
-We would begin this segment by building our smart contract first using Remix. Remix is a web based IDE that allows developers to write, test and deploy smart contracts on the Celo blockchain. 
+Lets begin by building our first smart contract on Solidity using the Remix IDE. The Remix IDE is a web based IDE that allows developers to write, test and deploy smart contracts on the Celo blockchain.   
+
+You can learn how the remix works by following the steps below:
+
+  - Go to https://remix.ethereum.org/.
+  - Click on featured plugins, “LEARNETH”.
+  - Click on Remix Basics.
+  - Start the tutorial and finish all lessons of Remix Basics.
 
 Here is a preview of the Remix IDE:
 ![image](images/2.png)
 
-On Remix, We would create a new workspace and then a new file which we would name `cardealer.sol`
+Considering you have understood how the Remix IDE works, let's create a Soliidity file: called seedmarketplace.sol
+
+  - Go to remix.ethereum.org, 
+  - Create a new file, 
+  - Name it seedmarketplace.sol. You give it any name you want but lets stick to seedmarketplace.sol. 
+  - Open that file. The .sol extension indicates that it is a solididty file.
 
 
-Starting out in the first line, you include a statement that specifies the license under which the code is being released.
+On the first line of your seedmarketplace.sol lets include a statement that specifies the license under which the code is being released.
 
 ```js
 // SPDX-License-Identifier: MIT
@@ -61,8 +74,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 This license governs how the code can be used, and it is important to ensure that the correct license is used to avoid any legal issues. A resource such as SPDX can be used to help identify a suitable license.
 
-To ensure the smart contract can run without any issues and is protected by a license, it's important to indicate the version of the compiler and the license it uses. This can be done by specifying the compiler version with the `pragma` keyword, and the license used, by including a statement that specifies the license at the beginning of the contract code.
-
+Using the pragma keyword, you specify the solidity version that you want the compiler to use. In this case, it should be higher than or seven and lower than nine. It is important to specify the version of the compiler because solidity changes constantly.
 
 Next up, we define an `IERC20Token` interface which enables us to interact with the celo stablecoin (cUSD). 
 
@@ -92,178 +104,224 @@ You can find more information on how to use these functions and events in the Ce
 
 
 
-Following this, You define your smart contract by giving it a name. In our case our contract name is `CarDealer`. You can name it anything you want but ensure you keep it descriptive.
+After defining our `IERC20Token` interface`, we define our contract with the keyword contract and give it a name. which in our case we gave it SeedMarketplace. You can give it any name but ensure its descriptive.
 
 ```js
-contract CarDealer{
-    
-    uint internal carLength = 0;
+contract SeedMarketplace{
+    uint internal seedLength = 0;
     address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
   ...
 ```
 
-In the next line, you define a state variable carLength, this is going to keep track of the cars in our contract. It is of a `uint` type which means it can only store integer values. [(Learn more about data types in solidity)](https://docs.soliditylang.org/en/latest/types.html)
+In the next line, you define a state variable seedLength, this is going to keep track of the seeds in our contract. It is of a `uint` type which means it can only store integer values. [(Learn more about data types in solidity)](https://docs.soliditylang.org/en/latest/types.html)
 We also define the visibility of our variable to `internal` which means it cannot be accessed from external smart contracts or addresses and can only be modified within the smart contract. ([Learn more about visiblity](https://docs.soliditylang.org/en/latest/contracts.html#visibility-and-getters))
 
 Next, To interact with the cUSD ERC-20 token on the Celo alfajores test network, you need to know the address of the token.
 
 
-After defining the single variables used in the contract, you want to create a "model" for a car, give the car its properties and group variables together.
+After defining the single variables used in the contract, you want to create a "model" for our seed below.
 
 ```js
-    struct Car{
-        address payable owner;
-        string carName;
-        string carDescription;
-        string carImage; 
+    struct SeedInformation {
+        address  owner;
+        string seedName;
+        string seedImgUrl;
+        string seedDetails;
+        string  seedLocation;
         uint price;
-        bool isUsed; 
-        bool isBought;
+        string email;
     }
-    
-    mapping (uint => Car) internal cars;
 ```
 
 To do this, you would require a struct data type with the keyword `struct` and give it multiple properties. ([Learn about structs here](https://docs.soliditylang.org/en/latest/types.html#structs))
 
 For this tutorial, these would be the variables that you would store in the struct:
-1. owner - This would store the address of the owner of a particular car as all cars in the marketplace would be owned by someone. It is of the address type
-2. carName - This stores the name of the car. It is of type string
-3. carImage - stores the url of the car. Type string
-4. carDescription - car description.  Type string
-5. price - This stores the price of the car. Its a number so its of type uint
-6. isUsed - This would store if the car is used or not. It would be a boolean type. True or false
-7. isSale - This keeps track of when a car is on sale or not. Boolean type
-8. isBought - This keeps track of when a car has been bought. Boolean type
+1. owner - This would store the address of the owner of a particular seed. It is of the address type
+2. seedName - This stores the name of the seed. it is of type string.
+3. seedImgUrl - This stores the image url of the seed, it is of type string.
+4. seedDetails - This stores the description of the seed, it is of type string.
+5. seedLocation - This stores the location of the seeed, it is of type string.
+6. price - This stores the price of the seed. Its a number so its of type uint.
+7. email - This stores the email of the seller of that seed, it is of type string.
 
 
-To handle multiple cars, a mapping is needed where you can access the value of a car through their key. Just like dictionaries in python or objects in Javascript.
-To create a mapping, you use the keyword `mapping` and assign a key type to a value type. In this case, your key would be an integer and the value would be the struct Car we just created.
 
-
-In the next section, you will define a function to add the car to the smart contract.
-
+after creating the model of our seed, we would create a map to store multiple seeds:
 ```js
-    function setCar(
-        string memory _carName,
-        string memory _carDescription,
-        string memory _carimage,
-        bool _isUsed,
-        uint _price
-    )public {
-        cars[carLength] = Car(
-              payable(msg.sender),
-              _carName,
-              _carDescription,
-              _carimage,
-              _price,
-              _isUsed,
-              false
-        );
-        carLength++;
-    }
+mapping (uint => SeedInformation) internal listedSeeds;
 ```
 
-You have to specify the parameters type in the function. In this case, we need to pass the name, description, image, price and isUsed (all with an underscore to differentiate them from the struct values) as parameters to the function. Name the function `setCar` with a visibility of public.
+To handle multiple seeds, a mapping is needed where you can access the value of a seed through its key. Just like dictionaries in python or objects in Javascript.
+To create a mapping, you use the keyword `mapping` and assign a key type to a value type. In this case, your key would be an integer and the value would be the struct SeedInformation we just created.
 
-Next, associate the key carLength with a new Car structure in the cars mapping.
+
+next we would create another model called PurchasedSeedInfo. This model will be used later by a map to store seeds being purchased.
+
+```js
+struct PurchasedSeedInfo {
+        address purchasedFrom;
+        string seedName;
+        string seedImgUrl;
+        uint256 timeStamp;
+        uint price;
+        string email;
+    }
+````
+
+the variables used in the above struct are:
+
+1. purchasedFrom - its of type address. It is used to store the address of the owner of that seed.
+2. seedName - it is of type string, it stores the name of the seed. .
+3. seedImgUrl - it is of type string, it stores the image url of the seed, .
+4. seedDetails - it is of type string, it stores the description of the seed, .
+5. seedLocation - it is of type string, it stores the location of the seed, .
+6. price - it is of type uint since we are storing a number. It stores the price of the seed. Its a number so its of type uint.
+7. email - it is of type string, it stores the email of the seller of that seed, .
+
+
+After creating the model we need to have to store all seeds purchased by a particular buyer. We can achieve that by using the mapping method
+
+```js
+mapping(address => PurchasedSeedInfo[]) internal purchasedSeeds;
+```
+
+this time the mapping method uses the address of the buyer as key to store all seed purchased by that particular buyer in an array.
+
+In the next section, you will define a function to add the seed to the smart contract.
+
+```js
+    function listSeed(string memory _seedName, string memory _seedImgUrl,
+    string memory _seedDetails, string memory  _seedLocation, uint _price, string memory _email) public {
+        listedSeeds[listedSeedLength] = SeedInformation({
+        owner : payable(msg.sender),
+        seedName: _seedName,
+        seedImgUrl: _seedImgUrl,
+        seedDetails : _seedDetails,
+        seedLocation: _seedLocation,
+        price : _price,
+        email : _email
+      });
+     listedSeedLength++;
+}
+```
+In the code above we create a function called listedSeed which includes parameters names and its type. We use the underscore in the name of the parameters to differentiate it from  the struct value we setting. 
+
+The function has its  visibilty type set to public.  You can click on this link to know more about visibilty types. 
+
+Next, we associate the key seedLength with a new SeedInformaition structure in the listedSeeds mapping.
 
 The first field of the struct is the address of the owner who can receive payments. The msg.sender function returns the address of the entity that initiated the call and is capable of receiving payments. This address will be stored as the owner's address.
 You also need to assign values to the other variables using the provided parameters.
 
-The isBought value should be set to false, because on creating a car alias, the car default state should be for sale.
 
 
-Up next, you would create a function that would read the products created in the preceding function.
+next we create a function to read a listed seed when the index of that seed is passed
 
 ```js
-    function getCar (uint _index) public view returns (
-        address payable,
+    function getListedSeedById(uint _index) public view returns (
+        address,
         string memory,
         string memory,
         string memory,
-        uint,
-        bool,
-        bool
+        string memory,
+        uint price,
+        string memory
+
     ) {
-        Car storage car = cars[_index];
-        return(
-          car.owner,
-          car.carName,
-          car.carDescription,
-          car.carImage,
-          car.price,
-          car.isUsed,
-          car.isBought
+
+        return (
+            listedSeeds[_index].owner,
+            listedSeeds[_index].seedName,
+            listedSeeds[_index].seedImgUrl,
+            listedSeeds[_index].seedDetails,
+            listedSeeds[_index].seedLocation,
+            listedSeeds[_index].price,
+            listedSeeds[_index].email
         );
     }
 ```
 
-This function will carry a parameter of _index to be able to get a particular car alias. You also need to specify the variables you will return with the function. 
+This function will carry a parameter of _index to be able to get a particular seed alias. You also need to specify the variables you will return with the function. 
 In this case, it would be a tuple corresponding to the variables declared in the struct. 
-The function needs to return the address of the owner, the strings and the boolean values of `isUsed` and `isBought`
+The function will return the address of the owner, seedName, seedImgUrl, seedDetails, seedLocation, price and email address of the owner. 
 
 
-Proceeding, you need to create a function that enables a user buy a car from your contract. 
+
+next, we create a function to enable users  purchase a  seed on the smart contract. 
 
 ```js
-    function buyCar(uint _index) public  payable {
-        require(cars[_index].isBought == false,"Not for Sale");
+    function buySeed(uint _index, address _owner, string memory _seedName, string memory _seedImgUrl,  uint _price, string memory _email) public payable  {
+        require(listedSeeds[_index].owner != msg.sender, "you are already an owner of this seed");
         require(
           IERC20Token(cUsdTokenAddress).transferFrom(
             msg.sender,
-            cars[_index].owner,
-            cars[_index].price
+            listedSeeds[_index].owner,
+            listedSeeds[_index].price
           ),
-          "This transaction could not be performed"
+          "Transfer failed."
         );
-        
-        // change owner
-        cars[_index].owner = payable(msg.sender);
-        // change the sale  status
-        cars[_index].isBought = true;
-        
+        storePurchasedSeeds(_owner, _seedName, _seedImgUrl, _price, _email);
     }
+
 ```
 
-The "buyCar" function, which is public and payable, takes in an index of type uint as a parameter.
+The "buySeed" function, which is public and payable, takes the _index, _owner, _seedName, seedImgUrl, _price, _emaiil and their respective types as parameter.
 
-This function uses the require function to ensure that the cUSD transaction is successful. It then uses the ERC-20 token interface and the stored address to call the transferFrom method to transfer cUSD.
+Th next line of code is the require method which takes two parameters: 
+  - The condition 
+  - The error message 
+  
+It works like the if statement in javascript. In our parameters, it checks if the buyer of that seed is not the seller. If it is false,  it trows an error saying "you are already an owner of this seed".
 
-The first parameter is the address of the sender, accessed using the msg.sender method, the second parameter is the recipient of the transaction, which is the owner of the car at the given index, and the final parameter is the price of the car at the given index. 
+The second require method is to ensure that the cUSD transaction is successful. It then uses the ERC-20 token interface and the stored address to call the transferFrom method to transfer cUSD.
 
-If the transaction is unsuccessful, an error message will be displayed. If successful, the owner of the car then becomes the sender of the transaction and the status of isBought changes to `true`.
+The first parameter is the address of the sender, accessed using the msg.sender method, the second parameter is the recipient of the transaction, which is the owner of the car at the given index, and the final parameter is the price of the seed at the given index. 
+
+If the transaction is successful, it calls the storePurchasedSeeds function which will be discussed later as we proceed. else it throws an error message saying "Transfer failed"
 
 
-In the final section of the smart contract, you would create a function to sell a car and also get the total cars
+
+
+next we create the storePurchasedSeeds function which was called in the buySeed function. It stores the seeds purchased by a user.
 
 ```js
-    function sellCar(uint _index) public {
-        require(msg.sender == cars[_id].owner,"Accessible only to the owner");
-        cars[_index].isBought = false;
-    }
-    
-    // function to get the length of the car array
-    function getCarLength() public view returns (uint) {
-        return (carLength);
+function storePurchasedSeeds(address _owner,
+ string memory _seedName, string memory _seedImgUrl, uint _price, string memory _email) public {
+    purchasedSeeds[msg.sender].push(PurchasedSeedInfo({purchasedFrom : _owner,
+    seedName : _seedName, price : _price, email : _email, seedImgUrl : _seedImgUrl, timeStamp : block.timestamp }));
+}
+``` 
+The function accepts parameters such as _owner, _seedName, _seedImgUrl, _price, _email and their various types.
+
+it uses the address of the caller of that contract as its key and stores the information provided in an array.
+
+up next we create a function called getPurchasedSeeds to fetch the list of all seeds purchased by a user. 
+
+```js
+function getPurchasedSeeds() public view returns (PurchasedSeedInfo[] memory) {
+    return purchasedSeeds[msg.sender];
+}
+
+``` 
+
+The function has a visibility type of public uses the view parameter since we are not modifying anything and returns an array which is the PurchasedseedInfo.
+
+
+next we create a  public function which returns an int value. The function returns the length of seeds created on the blockchain.
+
+```js
+function getListedSeedLength() public view returns (uint) {
+        return (listedSeedLength);
     }
 ```
 
-The `sellCar` function is a public function because we need it to be accessed outside the contract.
-
-The function will use the require function to make sure that the sender of this transaction is actually the owner of the car if not return an error.
-
-If that succeeds, then change the isBought function to false so others now  have the opportunity to buy it.
-
-Next in line, create a public function that will iterate over the stored cars in the frontend and return the total number of cars.
 
 Here is the full code:
 
 
 ```js
-// SPDX-License-Identifier: MIT  
-
-pragma solidity >=0.7.0 <0.9.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.3;
 
 interface IERC20Token {
   function transfer(address, uint256) external returns (bool);
@@ -272,101 +330,120 @@ interface IERC20Token {
   function totalSupply() external view returns (uint256);
   function balanceOf(address) external view returns (uint256);
   function allowance(address, address) external view returns (uint256);
-
   event Transfer(address indexed from, address indexed to, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-contract CarDealer{
-    
-    uint internal carLength = 0;
-    
+import "@openzeppelin/contracts/utils/Strings.sol";
+
+contract AgroCelo{
+   // Declaring variables.
+    uint internal listedSeedLength = 0;
     address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
-    struct Car{
-        address payable owner;
-        string carName;
-        string carDescription;
-        string carImage; 
+    // Ceating a struct to store event details.
+    struct SeedInformation {
+        address  owner;
+        string seedName;
+        string seedImgUrl;
+        string seedDetails;
+        string  seedLocation;
         uint price;
-        bool isUsed; 
-        bool isBought;
+        string email;
     }
-    
-    mapping (uint => Car) internal cars;
-   
-    function setCar(
-        string memory _carName,
-        string memory _carDescription,
-        string memory _carimage,
-        bool _isUsed,
-        uint _price
-    )public {
-        cars[carLength] = Car(
-              payable(msg.sender),
-              _carName,
-              _carDescription,
-              _carimage,
-              _price,
-              _isUsed,
-              false
-        );
-        carLength++;
+
+    struct PurchasedSeedInfo {
+        address purchasedFrom;
+        string seedName;
+        string seedImgUrl;
+        uint256 timeStamp;
+        uint price;
+        string email;
     }
-    
-    // this function reads a particular car data
-    function getCar (uint _index) public view returns (
-        address payable,
+
+    //map used to store listed seeds.
+    mapping (uint => SeedInformation) internal listedSeeds;
+
+    //map used to store seeds purchased.
+    mapping(address => PurchasedSeedInfo[]) internal purchasedSeeds;
+
+
+    // Function used to list a seed.
+    function listSeed(string memory _seedName, string memory _seedImgUrl,
+    string memory _seedDetails, string memory  _seedLocation, uint _price, string memory _email) public {
+        listedSeeds[listedSeedLength] = SeedInformation({
+        owner : payable(msg.sender),
+        seedName: _seedName,
+        seedImgUrl: _seedImgUrl,
+        seedDetails : _seedDetails,
+        seedLocation: _seedLocation,
+        price : _price,
+        email : _email
+      });
+     listedSeedLength++;
+}
+
+
+// Function used to fetch a lised seed by its id.
+    function getListedSeedById(uint _index) public view returns (
+        address,
         string memory,
         string memory,
         string memory,
-        uint,
-        bool,
-        bool
+        string memory,
+        uint price,
+        string memory
+
     ) {
-        Car storage car = cars[_index];
-        return(
-          car.owner,
-          car.carName,
-          car.carDescription,
-          car.carImage,
-          car.price,
-          car.isUsed,
-          car.isBought
+
+        return (
+            listedSeeds[_index].owner,
+            listedSeeds[_index].seedName,
+            listedSeeds[_index].seedImgUrl,
+            listedSeeds[_index].seedDetails,
+            listedSeeds[_index].seedLocation,
+            listedSeeds[_index].price,
+            listedSeeds[_index].email
         );
     }
-    
-    // function to buy a car
-    function buyCar(uint _index) public  payable {
-        require(cars[_index].isBought == false,"Not for Sale");
+
+
+// function used to purchase a seed by another farmer.
+function buySeed(uint _index, address _owner, string memory _seedName, string memory _seedImgUrl,  uint _price, string memory _email) public payable  {
+        require(listedSeeds[_index].owner != msg.sender, "you are already an owner of this seed");
         require(
           IERC20Token(cUsdTokenAddress).transferFrom(
             msg.sender,
-            cars[_index].owner,
-            cars[_index].price
+            listedSeeds[_index].owner,
+            listedSeeds[_index].price
           ),
-          "This transaction could not be performed"
+          "Transfer failed."
         );
-        
-        // change owner
-        cars[_index].owner = payable(msg.sender);
-        // change the sale  status
-        cars[_index].isBought = true;
-        
+        storePurchasedSeeds(_owner, _seedName, _seedImgUrl, _price, _email);
     }
 
-    // function for user to sell his own car
-    function sellCar(uint _index) public {
-        require(msg.sender == cars[_index].owner,"Accessible only to the owner");
-        cars[_index].isBought = false;
-    }
-    
-    // function to get the length of the car array
-    function getCarLength() public view returns (uint) {
-        return (carLength);
+// function used to fetch seeds purchased already by you.
+function getPurchasedSeeds() public view returns (PurchasedSeedInfo[] memory) {
+    return purchasedSeeds[msg.sender];
+}
+
+
+// function used to store purchase seed by a particular owner.
+function storePurchasedSeeds(address _owner,
+ string memory _seedName, string memory _seedImgUrl, uint _price, string memory _email) public {
+    purchasedSeeds[msg.sender].push(PurchasedSeedInfo({purchasedFrom : _owner,
+    seedName : _seedName, price : _price, email : _email, seedImgUrl : _seedImgUrl, timeStamp : block.timestamp }));
+}
+
+
+
+// function used to get length of lised seeds.
+    function getListedSeedLength() public view returns (uint) {
+        return (listedSeedLength);
     }
 
-} 
+}
+ 
 ```
 
 ## Contract Deployment
@@ -385,282 +462,699 @@ Next up, on remix, download and activate the celo plugin from the plugin manager
 
 ## Frontend Development
 
-To get setup with building your react dapp, you would have to setup your new react project. 
-1.  - Run this on your terminal
-```bash 
-    npx create-react-app cardealer
-```
-This should take a few minutes to complete depending on your internet connection. 
-2.  - Navigate to the directory created
-3.  - Open the directory using your code editor. In this case, it would be vscode and you would run this on your terminal
-```bash
-    code cardealer
-```
-This should open a vscode window with the cardealer directory.
+Going futher we will be building our frontend to interact with our smartcontract that is being deployed. You need to make sure you have installed Node.js 10 or higher version.
 
-4. In the `package.json` file, replace the existing code with this:
+Next we need to open a command line interface in the folder or directory where you want to build the frontend and run the code below:
 
-```json
-    {
-      "name": "cardealer",
-      "version": "0.1.0",
-      "private": true,
-      "dependencies": {
-        "@celo/contractkit": "^1.2.4",
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.1.0",
-        "@testing-library/user-event": "^12.1.10",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-error-overlay": "^6.0.9",
-        "react-router-dom": "^5.3.0",
-        "react-scripts": "4.0.3",
-        "web-vitals": "^1.0.1"
-      },
-      "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
-      },
-      "eslintConfig": {
-        "extends": [
-          "react-app",
-          "react-app/jest"
-        ]
-      },
-      "browserslist": {
-        "production": [
-          ">0.2%",
-          "not dead",
-          "not op_mini all"
-        ],
-        "development": [
-          "last 1 chrome version",
-          "last 1 firefox version",
-          "last 1 safari version"
-        ]
-      }
-    }
-
+```js
+git clone https://github.com/dacadeorg/celo-boilerplate-web-dapp
 ```
-  This is to make sure the dependencies required to build the frontend are in place
-  
-5. Install all dependencies
-  ```bash
-    npm install 
-  ```
-6. Start a server
-  ```bash
-    npm start
-  ```
+This will create a folder called celo-boilerplate-web-dapp. The folder contains neccessary setup files needed to build our frontend and connect it with our smartcontract.
+
+next we move to our root directory on the same command line interface by run this code
+```js
+cd celo-boilerplate-web-dapp
+``` 
+The code change the directory in the command line interface to the root directory inorder for us to install the dependences that comes with the boilerplate.
+
+To install all the dependencies we type the code below and hit enter.
+
+```js
+npm install
+```
+Installing of all dependencies might take a while. After the dependencies have been installed, we can start up the server by running the code:
+
+```js
+npm run dev
+```
+Your project should be running here http://localhost:3000/ and a browser window should pop up showwing "hello world".
+
+
+After starting the server we need to open the celo-boilerplate-web-dapp folder which is the root folder in an IDE you can use any IDE for it, but preferably you use vscode.
 
 ## The HTML part of the Dapp
 In the next step of the tutorial, you will begin building the foundation of your decentralized application (DApp) using HTML.
+To do this we need to go to the root directory of the folder and find the src folder,  open the folder and click on the index.html file in our IDE. clear all that it written and type this: 
 
-First off, you would add the following folder name `assets2` to the public folder. This has some CSS properties and images that you would be using to enable you build your dapp swiftly. ([Download it here](https://github.com/dahnny/CeloDealer/tree/main/public/assets2))
-
-Open the index.html file located in the public folder of your project, and let's begin.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>CeloDealer</title>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
-Start by declaring the document type, then add an HTML tag, create a head element, and include meta tags. 
+The code above declares the document type, add an HTML tag, create a head element, and add meta tags.
 
-Afterwards, you will import some external stylesheets.
+Next, we will be importing some external stylesheets. we will use bootstrap, a popular front-end library that allows you to create elegant responsive websites very fast. You can quickly choose from bootstrap components like buttons or cards and customize them to your needs.
 
 ```html
-  <!-- site favicon -->
-  <link rel="shortcut icon" type="image/png" href="assets2/image/favicon.jpg"/>
-  <!-- fontawesome css link -->
-  <link rel="stylesheet" href="assets2/css/fontawesome.min.css">
-  <!-- bootstrap css link -->
-  <link rel="stylesheet" href="assets2/css/bootstrap.min.css">
-  <!-- lightcase css link -->
-  <link rel="stylesheet" href="assets2/css/lightcase.css">
-  <!-- animate css link -->
-  <link rel="stylesheet" href="assets2/css/animate.css">
-  <!-- nice select css link -->
-  <link rel="stylesheet" href="assets2/css/nice-select.css">
-  <!-- datepicker css link -->
-  <link rel="stylesheet" href="assets2/css/datepicker.min.css">
-  <!-- wickedpicker css link -->
-  <link rel="stylesheet" href="assets2/css/wickedpicker.min.css">
-  <!-- jquery ui css link -->
-  <link rel="stylesheet" href="assets2/css/jquery-ui.min.css">
-  <!-- owl carousel css link -->
-  <link rel="stylesheet" href="assets2/css/owl.carousel.min.css">
-  <!-- main style css link -->
-  <link rel="stylesheet" href="assets2/css/main.css">
-</head>
+  <!-- CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
 ```
-From our `assets2` folder, we import some stylesheets that will be used to give our frontend a specific feel.
 
-_Disclaimer: This method of importing css files is not recommended for building large scale applications and is only used here for the purpose of keeping this tutorial simple and concise._
+after importing the stylesheet we will also be needing the bootstrap icons which can be imported using external import with the code below:
 
-Up next, you would add the body of the html and add specific script tags which would give our dapp some functionality.
+```html
+ <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+```
+
+Up next, we would importing the font as our main font by using the style tag to style the font type and also setting the title of the page with the title tag. Here we set the title to AgroCelo but you can set it to any name you want as long as it is descriptive, and we close the head tag.
+
+```html
+<style>
+    :root {
+    --bs-font-sans-serif: "DM Sans", sans-serif;
+    }
+    </style>
+    <title>AgroCelo</title>
+    </head>
+```
+
+up next we would be defining our body tag where we would create our forms,  modals, hero and navigation bar, notification bar. lets get started.
+
+For the notification bar we write this code:
 
 ```html
 <body>
 
-  <!-- preloader start -->
-  <div id="preloader"></div>
-  <!-- preloader end -->   
-
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root"></div>
-      <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    --></div>
-    <!-- jquery js link -->
-    <script src="assets2/js/jquery-3.3.1.min.js"></script>
-    <!-- jquery migrate js link -->
-    <script src="assets2/js/jquery-migrate-3.0.0.js"></script>
-    <!-- bootstrap js link -->
-    <script src="assets2/js/bootstrap.min.js"></script>
-    <!-- lightcase js link -->
-    <script src="assets2/js/lightcase.js"></script>
-    <!-- wow js link -->
-    <script src="assets2/js/wow.min.js"></script>
-    <!-- nice select js link -->
-    <script src="assets2/js/jquery.nice-select.min.js"></script>
-    <!-- datepicker js link -->
-    <script src="assets2/js/datepicker.min.js"></script>
-    <!-- wickedpicker js link -->
-    <script src="assets2/js/wickedpicker.min.js"></script>
-    <!-- owl carousel js link -->
-    <script src="assets2/js/owl.carousel.min.js"></script>
-    <!-- jquery ui js link -->
-    <script src="assets2/js/jquery-ui.min.js"></script>
-    <!-- main js link -->
-    <script src="assets2/js/main.js"></script>
-  </body>
-  
-  </html>
+<!-- Displays notifications on the web page -->
+    <div class="container">
+          <div class="alert alert-warning fixed-top" role="alert">
+            <span id="notification">⌛ Loading please wait...</span>
+          </div>
+    </div>
 ```
 
-## App.js
-The App.js file is the starting point for the React frontend of the application. The App component is responsible for the layout and organization of the other components. It includes the App component, which acts as a container for all other components. 
-At the beginning of the App.js file, necessary libraries, components and hooks are imported.
+The div has the class alert that you will later select in your JS code. The span element has the id notification, that you will use to insert the text that you want to display.
+
+
+Up next is the navigation bar which is used to show our app name and the amount of cUSD we currently have. The amount of cUSD we be dynamic as the main data will be gotten from our javascript file.
+
+```html
+ <!-- Navbar starts here -->
+  <nav class="navbar bg-success " >
+        <div class="container">
+          <span class="navbar-brand m-0 h4 fw-bold text-white">AgroCelo</span>
+          <span class="nav-link border rounded-pill bg-light">
+            <span id="balance">0</span>
+            cUSD
+          </span>
+        </div>
+      </nav>
+ <!-- Navbar ends here -->
+``` 
+
+The navbar has two spans one which shows the name of our app and the secound which shows the amount of cUSD we have. The second span has an id of "balance" which will be later needed in our javascript file to render the actual celo balance.
+
+
+Up next we will be creating our hero where which is a background that tells the user what the app does.
+
+```html
+<!-- Hero starts here -->
+ <div class="row bg-success text-white">
+    <div class="col-md-6 p-5">
+      <h4>#1 Seed Marketplace</h4>
+      <p>
+        AgroCelo is a celo blockchain agro project which enables farmers to
+        buy and sell the plant seed on the celo blockchain.
+        <p>
+      <button class="btn btn-success shadow" data-bs-toggle="modal"
+          data-bs-target="#addModal">List Seed</button>
+    </div>
+
+<div class="col-md-6">
+    <img style="height : 300px; width : 100%;"
+    src="https://www.gardeningknowhow.com/wp-content/uploads/2020/07/seed-planting.jpg" />
+  </div>
+</div>
+ <!--Hero ends here -->
+<br />
+``` 
+
+The hero is divided into two columns by wrapping it with a div which has class of row. using is contained in a div with various bootstrap style which it has a h4 tag which explains what the app does and a button which will later pop up a modal where you will fill a form to list a seed on the smart contract. The second column contains and image tag where the source of the image is gotten from the url.
+
+
+
+Up next we will also be creating toggle buttons inorder to switch between the general seed listed on the market and the ones you already bought
+
+```html
+<!-- divs showing buttons used in switching views -->
+<div class="row my-4">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+ <nav class="nav nav-pills" id="tabs">
+  <a class="nav-link active bg-success  showProducts"
+  id="productTab" aria-current="page" style="cursor : pointer;">Products</a>
+  <a class="nav-link showpurchased" id="purchasedTab" style="cursor : pointer;">Purchased Products</a>
+</nav>
+</div>
+<div class="col-md-4"></div>
+</div>
+<!-- end of div -->
+```
+in our code we used boostrap nav pills to create two buttons one with id set to "productTab" and the other set to "purchasedTab". The reason for the id's is so that we can use or target the buttons in our javascript code.
+
+Up next we will be creating a div that will show all seeds listed on the smartcontract:
+
+```html
+   <!-- Start of container showing listed seeds -->
+        <main id="marketplace" class="row">
+          <div class="d-flex mt-3 justify-content-center">
+  <div class="spinner-border text-success spinner-border-sm" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+    <p class="mx-1">Fetching seeds...</p>
+</div>
+        </main>
+        <main id="purchasedProduct" class="row d-none">
+          <div class="d-flex mt-3 justify-content-center">
+  <div class="spinner-border text-success spinner-border-sm" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+    <p class="mx-1">Fetching data ...</p>
+</div>
+        </main>
+      </div>
+<!-- End of container -->
+``` 
+The main tag contains two id's one set to "marketplace" which will be used later on in our javascript code to target and render the seeds from the smart contract, while the other set to "purchasedProduct" which we will also use later in our javascript code to render seeds that is being purchased by us.
+
+up next is creating our first modal. This modal is used to show the full details of a particular seed. below is the code.
+
+```html
+<!-- start of modal that shows seed details -->
+<div
+      class="modal fade"
+      id="addModal1"
+      tabindex="-1"
+      aria-labelledby="newProductModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static" data-bs-keyboard="false"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newProductModalLabel">Details </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalHeader">
+          </div>
+          </div>
+          </div>
+          </div>
+<!-- end of modal -->
+```
+Up next is another modal which will be use to add or list a seed to the celo blockchain.
+
+```html
+<!-- start of modal to list a seed -->
+    <div
+      class="modal fade"
+      id="addModal"
+      tabindex="-1"
+      aria-labelledby="newProductModalLabel1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newProductModalLabel1">New </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    id="seedName"
+                    class="form-control mb-2"
+                    placeholder="seed name"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    id="seedImgUrl"
+                    class="form-control mb-2"
+                    placeholder="seed image url"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="textarea"
+                    id="seedDetails"
+                    class="form-control mb-2"
+                    placeholder="seed details"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    id="seedLocation"
+                    class="form-control mb-2"
+                    placeholder="seed location"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    id="newPrice"
+                    class="form-control mb-2"
+                    placeholder="price"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control mb-2"
+                    placeholder="email address"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-light border"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+              id="listSeedBtn"
+            >
+              List Seed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- end of modal -->
+
+```
+
+Inside the modals are html forms which will be used to list a seed on the celo network.
+
+Finally, add the bootstrap JS library and a library called blockies, that you are going to use to visualise blockchain addresses and close the body and html tag.
+```html
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/ethereum-blockies@0.1.1/blockies.min.js"></script>
+  </body>
+</html>
+```
+
+Here is the full code for the html part:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <style>
+
+      :root {
+        --bs-font-sans-serif: "DM Sans", sans-serif;
+        --bs-gray: #6c757d;
+      }
+
+
+    </style>
+
+    <title>AgroCelo</title>
+  </head>
+
+  <body>
+
+    <!-- Displays notifications on the web page -->
+    <div class="container">
+          <div class="alert alert-warning fixed-top" role="alert">
+            <span id="notification">⌛ Loading please wait...</span>
+          </div>
+    </div>
+
+
+   <!-- Navbar starts here -->
+  <nav class="navbar bg-success " >
+        <div class="container">
+          <span class="navbar-brand m-0 h4 fw-bold text-white">AgroCelo</span>
+          <span class="nav-link border rounded-pill bg-light">
+            <span id="balance">0</span>
+            cUSD
+          </span>
+        </div>
+      </nav>
+ <!-- Navbar ends here -->
+
+
+
+ <!-- Hero starts here -->
+ <div class="row bg-success text-white">
+    <div class="col-md-6 p-5">
+      <h4>#1 Seed Marketplace</h4>
+      <p>
+        AgroCelo is a celo blockchain agro project which enables farmers to
+        buy and sell the plant seed on the celo blockchain.
+        <p>
+      <button class="btn btn-success shadow" data-bs-toggle="modal"
+          data-bs-target="#addModal">List Seed</button>
+    </div>
+
+<div class="col-md-6">
+    <img style="height : 300px; width : 100%;"
+    src="https://www.gardeningknowhow.com/wp-content/uploads/2020/07/seed-planting.jpg" />
+  </div>
+</div>
+ <!--Hero ends here -->
+
+
+<br />
+
+<!-- divs showing buttons used in switching views -->
+<div class="row my-4">
+  <div class="col-md-4"></div>
+
+  <div class="col-md-4">
+ <nav class="nav nav-pills" id="tabs">
+  <a class="nav-link active bg-success  showProducts"
+  id="productTab" aria-current="page" style="cursor : pointer;">Products</a>
+  <a class="nav-link showpurchased" id="purchasedTab" style="cursor : pointer;">Purchased Products</a>
+</nav>
+</div>
+<div class="col-md-4"></div>
+</div>
+<!-- end of div -->
+
+<br />
+
+
+ <!-- Start of container showing listed seeds -->
+        <main id="marketplace" class="row">
+          <div class="d-flex mt-3 justify-content-center">
+  <div class="spinner-border text-success spinner-border-sm" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+    <p class="mx-1">Fetching seeds...</p>
+</div>
+        </main>
+
+        <main id="purchasedProduct" class="row d-none">
+          <div class="d-flex mt-3 justify-content-center">
+  <div class="spinner-border text-success spinner-border-sm" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+    <p class="mx-1">Fetching data ...</p>
+</div>
+        </main>
+
+
+      </div>
+<!-- End of container -->
+
+
+<!-- start of modal that shows seed details -->
+<div
+      class="modal fade"
+      id="addModal1"
+      tabindex="-1"
+      aria-labelledby="newProductModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static" data-bs-keyboard="false"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newProductModalLabel">Details </h5>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalHeader">
+          </div>
+          </div>
+          </div>
+          </div>
+<!-- end of modal -->
+
+
+<!-- start of modal to list a seed -->
+    <div
+      class="modal fade"
+      id="addModal"
+      tabindex="-1"
+      aria-labelledby="newProductModalLabel1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newProductModalLabel1">New </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    id="seedName"
+                    class="form-control mb-2"
+                    placeholder="seed name"
+                  />
+                </div>
+
+                <div class="col">
+                  <input
+                    type="text"
+                    id="seedImgUrl"
+                    class="form-control mb-2"
+                    placeholder="seed image url"
+                  />
+                </div>
+
+                <div class="col">
+                  <input
+                    type="textarea"
+                    id="seedDetails"
+                    class="form-control mb-2"
+                    placeholder="seed details"
+                  />
+                </div>
+
+
+
+                <div class="col">
+                  <input
+                    type="text"
+                    id="seedLocation"
+                    class="form-control mb-2"
+                    placeholder="seed location"
+                  />
+                </div>
+
+                <div class="col">
+                  <input
+                    type="text"
+                    id="newPrice"
+                    class="form-control mb-2"
+                    placeholder="price"
+                  />
+                </div>
+
+
+                <div class="col">
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control mb-2"
+                    placeholder="email address"
+                  />
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-light border"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+              id="listSeedBtn"
+            >
+              List Seed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- end of modal -->
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/ethereum-blockies@0.1.1/blockies.min.js"></script>
+  </body>
+</html>
+```
+##Reading and Writing on Our SmartContract
+Before going into the main.js file,  we need to be able to read and write from our smart contract and to be able to do that we need to go to Remix IDE and where we already wrote our smart contract, compile it and deploy on the celo network.
+
+in order to interact with your smart contract that is deployed in bytecode, you need an interface, the ABI (Application Binary Interface), so that the contractKit in our main.js can understand the bytecode. The ABI allows you to call functions and read data (Learn more about the ABI).
+
+When you compile your contract in Remix, Remix also creates the ABI in the form of a JSON for your contract. Copy the JSON and save it into the marketplace.abi.json file of the contracts folder in your project.
+
+After that you need to copy the smartcontract code and paste in your marketplace.js. When all this is done we can now move  to our main.js but take note of the address in which your contract is being deployed to because we will need it in our main.js file.
+
+
+## main.js
+The main.js file is file that enable us interact with our smartcontract. The beginning of the main.js file, necessary libraries and files are imported.
 
 ```js
-import React, { useState, useEffect } from 'react';
+import Web3 from "web3"
+import { newKitFromWeb3 } from "@celo/contractkit"
+import BigNumber from "bignumber.js"
+import marketplaceAbi from "../contract/marketplace.abi.json"
+import erc20Abi from "../contract/erc20.abi.json"
 
-import Web3 from 'web3'
-import { newKitFromWeb3 } from '@celo/contractkit';
-import BigNumber from "bignumber.js";
+const ERC20_DECIMALS = 18
+const MPContractAddress = "0x93C2eFb0Bc6d5f09D37af265B9B78c95e7dC69E4" // deployed smart contract address
+const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1" //Erc20 contract address
 
-const ERC20_DECIMALS = 18;
-
-const contractAddress = "0x83dce46765c4420b8E93eE1b2e9Fc79d254E9212";
-const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
 ```
+In the above code we imported Web from web3. web3.js is a  popular collection of libraries also used for ethereum, that allows you to get access to a web3 object and interact with node's JSON RPC API .
 
-You will start  off by importing standard react hooks like `useState` and `useEffect` from the react library.
-
-Then we import the web3, contractkit and bignumber js objects from their libraries.
+Then we import newKitFromWeb3 from the "@celo/contractkit". The contractkit library enables us  to interact with the celo blockchain.
 
 Celo's operations often deal with numbers that are too large for Javascript to handle. To handle these numbers, we will use bignumber.js.
 
-Create a variable called `ERC20_DECIMALS` and set its value to 18. By default, the ERC20 interface uses 18 decimal places.
+The erc2-Abi enables us to interact with the ERC-20 interface. The ERC-20 interface The ERC20 interface is a standard API for tokens within smart contracts. It enables make payment with the Celo stablecoin which is cUSD.
+
+Next we create a variable called `ERC20_DECIMALS` and set its value to 18. By default, the ERC20 interface uses 18 decimal places.
 
 On Remix, after the deployment of your contract, you will find the address to that contract which you need to interact with the functionality in your smart contract.
-Create a variable called `contractAddress` and assign it the contract address gotten from remix.
 
-Create a variable called `cUSDContractAddress` for the cUSD contract address.
+we create a variable called `contractAddress` and assign it the contract address gotten from remix.
 
+Then we create a variable called `cUSDContractAddress` for the cUSD contract address.
+
+
+Going futher we create three more global variable below:
 
 ```js
-import cardealer from './abis/car.abi.json';
-import erc20 from './abis/irc.abi.json';
+let kit //contractkit
+let contract // contract variable
+let listedSeeds = [] // array of listed seeds
 ```
-In the src folder, create an `abis` folder. This folder would contain two files. 
+The is use to store the address of a user that is conneted with his/her celo wallet. Later on we will take a look on how it works.
 
-The first file would be called `car.abi.json`. It would be used to store the abi for your contract.
-The second file would be called `irc.abi.json`. It would store the abi for the IERC20 interface.
+The contract stores an instance of the marketplace contract once a user connects their Celo wallet, so you can interact with it.
 
-To interact with a smart contract that is deployed in bytecode, an interface known as the ABI (Application Binary Interface) is required for the contractKit to interpret the bytecode. ([Learn about ABIs](https://docs.soliditylang.org/en/develop/abi-spec.html))
+The listedSeeds array stores the seeds that we will list on the blockchain soon.
 
-The ABI allows for the execution of functions and the reading of data. When using Remix to compile a contract, the ABI is also generated in the form of a JSON file. 
-
-This JSON file should be copied and saved into the "car.abi.json" file within the "abis" folder of the project.
-
+In order to store information in the kit and contract variables we need to create an asynchronous function called connectCeloWallet that allows a user to connect to the Celo Blockchain and read the balance of their account. The function will perform several checks and actions to ensure that the user has the necessary tools and permissions to interact with the Celo Blockchain.
 
 ```js
-import './App.css';
-import Header from './components/Header';
-import SalesCars from './components/SalesCars';
-import AddCar from './components/AddCar';
-import MyCar from './components/MyCar';
-```
+//Connects the wallet gets the account and initializes the contract
+const connectCeloWallet = async function () {
+  //checks if wallet is avaliable and gets the account.
+  if (window.celo) {
+    notification("⚠️ Please approve this DApp to use it.")
+    try {
+      await window.celo.enable()
+      notificationOff()
 
-Next, import the css files from `App.css`.
+      const web3 = new Web3(window.celo)
+      kit = newKitFromWeb3(web3)
 
-For the next lines, a `components` folder would need to be created inside the `src` folder for the various components of our application. 
-Create the files in the components folder as seen above. `Header.js`, `SalesCars.js`, `AddCar.js`, `MyCar.js`. 
-These sections would be discussed later.
+      const accounts = await kit.web3.eth.getAccounts()
+      kit.defaultAccount = accounts[0]
 
-Next up, we would be using useState to keep track of some variables through out the dapp. 
-
-
-```js
-function App() {
-
-  const [celoBalance, setCeloBalance] = useState(0);
-  const [contract, setcontract] = useState(null);
-  const [address, setAddress] = useState(null);
-  const [kit, setKit] = useState(null);
-  const [cUSDBalance, setcUSDBalance] = useState(0);
-  const [cars, setCars] = useState([]);
-  const [myCars, setMyCars] = useState([]);
-...
-```
-
-useState is a Hook in React that allows you to add state to functional components. It is a way to manage and update the state of a component. 
-
-useState returns an array with two elements: the current state, and a function to update it. The first argument passed to useState is the initial state, and the second argument is an optional callback function to run after the state is updated. ([Learn more about useState](https://reactjs.org/docs/hooks-state.html))
-
-The next task is to create an asynchronous function called connectCeloWallet that allows a user to connect to the Celo Blockchain and read the balance of their account. The function will perform several checks and actions to ensure that the user has the necessary tools and permissions to interact with the Celo Blockchain.
-
-```js
-...
-  const connectCeloWallet = async () => {
-    if (window.celo) {
-      try {
-        await window.celo.enable();
-        const web3 = new Web3(window.celo);
-        let kit = newKitFromWeb3(web3);
-
-        const accounts = await kit.web3.eth.getAccounts();
-        const user_address = accounts[0];
-
-        kit.defaultAccount = user_address;
-
-        await setAddress(user_address);
-        await setKit(kit);
-
-      } catch (error) {
-        console.log('There is an error')
-        console.log({ error });
-      }
-    } else {
-      console.log("please install the extension");
+      contract = new kit.web3.eth.Contract(marketplaceAbi, MPContractAddress)
+    } catch (error) {
+      notification(`⚠️ ${error}.`)
     }
-  };
+    notificationOff()
+  }
+  // if wallet is not avaliable excute enable the notification
+  else {
+    notification("⚠️ Please install the CeloExtensionWallet.")
+  }
+}
 ```
 
 
@@ -676,508 +1170,471 @@ You would then access the user's account by utilizing the web3 object and kit in
 
 After creating the new kit instance, use the method kit.web3.eth.getAccounts() to get an array of the connected user's addresses. Use the first address from this array and set it as the default user address by using kit.defaultAccount. This will allow the address to be used globally in the DApp.
 
-Now, create an asynchronous function called `getBalance` that retrieves the user's balance and updates the corresponding state variables
+
+Next we create a function called approve which will be used later to enable us get the user approval before making a transaction on the blockchain. It takes _price of the seed as a parameter. This function will be used later.
 
 ```js
-  const getBalance = async () => {
-    
-    const balance = await kit.getTotalBalance(address);
-    const celoBalance = balance.CELO.shiftedBy(-ERC20_DECIMALS).toFixed(2);
-    const USDBalance = balance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2);
+async function approve(_price) {
+  const cUSDContract = new kit.web3.eth.Contract(erc20Abi, cUSDContractAddress)
 
-    const contract = new kit.web3.eth.Contract(cardealer, contractAddress);
-    setcontract(contract);
-    setCeloBalance(celoBalance);
-    setcUSDBalance(USDBalance);
+  const result = await cUSDContract.methods
+    .approve(MPContractAddress, _price)
+    .send({ from: kit.defaultAccount })
+  return result
+}
+```
+In the approve function, we create a cUSD contract instance with the ABI and the contract address, cUSDContract, which enable us to call the cUSD contract method approve. You need to specify both the contract address that will be allowed to make transactions and the amount that it will be allowed to spend, i.e., the price of the seed.
+
+Again, you also need to specify who is going to spend the cUSD token. In this case it's the address stored in kit.defaultAccount. It returns the result for error handling if there is.
+
+
+
+Up next we create an asynchronous function called getBalance which we use in getting cUSD of the user and displaying it on the navbar we create in our html file.
+```js
+  // gets the balance of the connected account
+const getBalance = async function () {
+  const totalBalance = await kit.getTotalBalance(kit.defaultAccount)
+  // gets the balance in cUSD
+  const cUSDBalance = totalBalance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2)
+  document.querySelector("#balance").textContent = cUSDBalance
+}
   };
 ```
-Start by calling the `kit.getTotalBalance(address)` method, passing in the user's address. This method returns the user's balance in the form of an object that contains the amounts of CELO and cUSD tokens. The returned balance is then stored in the `balance` variable.
+We start by calling the `kit.getTotalBalance(address)` method, passing in the user's address. This method returns the user's balance in the form of an object that contains the amounts of CELO and cUSD tokens. The returned balance is then stored in the `balance` variable.
 
 The next step is to extract the CELO and cUSD balance from the "balance" object by using the `.CELO` and `.cUSD` properties respectively. Then it's shifted the value by -ERC20_DECIMALS which is a way to represent the balance in terms of smaller units in our case 18 decimal places, and then it's converting the value to fixed 2 decimal points. These values are stored in the `celoBalance` and `USDBalance` variables.
 
-Next, create a contract instance by calling the "new kit.web3.eth.Contract(cardealer, contractAddress)" , with your abi and contract address (created earlier) as arguments.
 
-Update the state by calling `setcontract(contract); setCeloBalance(celoBalance); setcUSDBalance(USDBalance);`. 
-
-
-Up next, create a function called `getCars` that retrieves the cars information from the smart contract and updates the corresponding state variables.
+Up next, create a function called `getListesSeeds` that retrieves the seeds information from the smart contract and stores it in the global array called listedSeeds we create above.
 
 ```js
- const getCars = async function () {
-    const carLength = await contract.methods.getCarLength().call();
-    const _cars = [];
+ // an async function used to get the listed seeds.
+const getListedSeeds = async function() {
+// a smartcontract call used to get listed seed length.
+  const listedSeedLength = await contract.methods.getListedSeedLength().call()
 
-    for (let index = 0; index < carLength; index++) {
-      let _car = new Promise(async (resolve, reject) => {
-        let c = await contract.methods.getCar(index).call();
-        resolve({
-          index: index,
-          owner: c[0],
-          carName: c[1],
-          carDescription: c[2],
-          carImage: c[3],
-          price: new BigNumber(c[4]),
-          isUsed: c[5],
-          isBought: c[6],
-        })
-      });
+  //initializing listSeed array
+  const _listedSeeds = []
 
-      _cars.push(_car);
-    }
-    const cars = await Promise.all(_cars);   
-    setCars(cars);
-    console.log(cars);
-    // return cars that have been bought
-    const _myCars = cars.filter((car)=>{
-      return (car.owner === address && (car.isBought === true ));
-    })    
-    setMyCars(_myCars);
-    
+  //  function that loops through all the listSeeds.
+  for (let i = 0; i < listedSeedLength; i++) {
+    let seed = new Promise(async (resolve, reject) => {
+
+  // a smartcontract call used to get listed seed by id.
+      let p = await contract.methods.getListedSeedById(i).call()
+      resolve({
+        index: i,
+        owner: p[0],
+        seedName: p[1],
+        seedImgUrl: p[2],
+        seedDetails: p[3],
+        seedLocation: p[4],
+        price: new BigNumber(p[5]),
+        email : p[6]
+      })
+    })
+
+    // push the items on the _listedSeed array
+    _listedSeeds.push(seed)
   }
+
+  // resolves all promise
+  listedSeeds = await Promise.all(_listedSeeds)
+  renderProductTemplate()
+}
 ```
 
-Start by calling the `contract.methods.getCarLength().call()` method, which returns the number of cars that are stored in the smart contract. This value is stored in the `carLength` variable.
+Before retrieving the listed seeds, we need to know the number of seeds listed already to enable us iterate over them. To do that we start by calling the `contract.methods.getSeedLength().call()` method, which returns the number of seeds that are stored in the smart contract. This value is stored in the `listedSeedLength` variable.
 
-You will then create an empty array called `_cars` that will be used to store the car objects. It uses a for loop to iterate through the cars stored in the smart contract, starting from index 0 up to the `carLength` value.
+Next we will create an empty array called `_listedSeeds` that will be used to store the listed seed objects. Next, we loop throught each seeds, and for each seed, we create a promise by calling the `contract.methods.getListedSeedById(i).call()` to get the listed seed data. Resolve the promise with the  seed data and then push the seed object to your _listedSeeds array. Be aware that the price needs to be a bigNumber object so you can later make correct payments.
 
-For each iteration, the function creates a new promise called `_car`, which retrieves the car information for the current index by calling the `contract.methods.getCar(index).call()` method. This method returns an array of values, such as owner, carName, carDescription, carImage, price, isUsed, isSale and isBought. These values are then stored in an object that is passed to the resolve function of the promise, along with the index.
-
-The `_car` promise is then pushed to the `_cars` array. After the loop is finished, wait for all promises in the `_cars` array to be resolved by calling `await Promise.all(_cars)`, this will make sure that all the cars have been retrieved before moving on. Then it's updating the state with the cars array, by calling `setCars(cars);`
-
-The next step is filtering the cars that have been bought by the user by checking the car.owner value and the isBought value and storing the result in _myCars variable, then it's updating the state with the _myCars variable.
+After the loop is finished, we wait for all promises in the `listedSeeds` array to be resolved by calling `await Promise.all(_listedSeeds)`, this will make sure that all the listed seeds have been retrieved before calling the renderProductTemplate function which will be created later. We use the renderProductTemplate to show the listedSeeds we just created on the web page.
 
 
-After creating these functions, you would need a way for them to be implemented in the application. In this case, the functions would need to be called every time the application starts. You would need to retrieve the balance and get the cars already created.
-For this, you would use the useEffect Hook.
+Next is to create the renderProductFunction(). In the renderProductTemplate function we get the id of the element in which we want to render the seeds in our case `marketplace`. Firstly we need to make it empty so as to avoid multiple rendering when the function is being called more than once. next we check if there is seed in the listSeeds array if it is true, we use the foreach loop to create a new div and set the productTemplate which we will discuss next to it and then we append the new div to the `marketplace`. 
 
 ```js
-  useEffect(() => {
-    connectCeloWallet();
-  }, []);
-
-  useEffect(() => {
-    if (kit && address) {
-      return getBalance();
-    } else {
-      console.log("no kit or address");
-    }
-  }, [kit, address]);
-
-  useEffect(() => {
-    if (contract) {
-      getCars()
-    };
-  }, [contract]);
+// function used to render a html template of listed seeds.
+function renderProductTemplate() {
+  document.getElementById("marketplace").innerHTML = ""
+  if (listedSeeds) {
+  listedSeeds.forEach((seed) => {
+    const newDiv = document.createElement("div")
+    newDiv.className = "col-md-3"
+    newDiv.innerHTML = productTemplate(seed)
+    document.getElementById("marketplace").appendChild(newDiv)
+  })}
+}
 ```
 
-The first useEffect hook runs the `connectCeloWallet()` function as a side-effect. we want the effect to run once when the component is rendered.
-
-The second useEffect hook calls the `getBalance()` function earlier created only when the kit and address are valid. This prevents unwanted errors.
-
-The third useEffect hooks calls the `getCars()` function when a contract is available so the function can use the contract to find the cars available.
-
-
-Next would be creating a function that allows users to add a car to the smart contract. You could call this function `addToCars()`
+Next lets create the productTemplate function. The productTemplate function returns an html element  and accept a parameter in our case called `seed`.
 
 ```js
-  const addtoCars = async (_name, _description, _image, _price, _isUsed) => {
+// function that create a html template of listed seeds
+function productTemplate(seed) {
+  return `
+ <div class="card mb-4">
+      <img class="card-img-top" src="${seed.seedImgUrl}" alt="..." style="height : 150px;">
+  <div class="card-body text-left p-3 position-relative">
+        <div class="translate-middle-y position-absolute top-0 end-0"  id="${seed.index}">
+        ${identiconTemplate(seed.owner)}
+        </div>
+        <p class="card-title  fw-bold mt-2 text-uppercase">${seed.seedName}</p>
+        <p class="mt-2 text-left fs-6">
+           ${new BigNumber(seed.price).shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD
+        </p>
+        <p class="card-text mt-4">
+           <div> <a class="btn btn-md btn-success view"
+           id="${seed.index}" style="width:100%;">View More Details</a></div>
+          </div>
+    </div>
+    `
+}
+```
+
+Inside it should have a card which contains an image tag, an identiconTemplate function which collects user address and displays it as an icon in other to differentiate different users and three paragraphs. They should all receive an object value named seed.seedImgUrl seed.owner, seed.price, seed.Name. The seed.price has to be convert into beceause it uses BigNumber.
+
+
+Up next we would create the identiconTemplate function. It recieves a parameter of _address. 
+
+```js
+// function  that creates an icon using the contract address of the owner
+function identiconTemplate(_address) {
+  const icon = blockies
+    .create({
+      seed: _address,
+      size: 5,
+      scale: 10,
+    })
+    .toDataURL()
+
+  return `
+  <div class="rounded-circle overflow-hidden d-inline-block border border-white border-2 shadow-sm m-0">
+    <a href="https://alfajores-blockscout.celo-testnet.org/address/${_address}/transactions"
+        target="_blank">
+        <img src="${icon}" width="40" alt="${_address}">
+    </a>
+  </div>
+  `
+}
+```
+
+The function returns a div that has an image tag with its src set to the variable icon declared at the top inside the fuction.
+
+Next we create two function called notification() and notificationOff(). The notification() function  displays the alert element with the text in the parameter and a notificationOff stops showing the alert element. They will be used when recieving and resolving promise using the try and catch block in our code to display error or success messages.
+
+```js
+// function to create a notification bar
+function notification(_text) {
+  document.querySelector(".alert").style.display = "block"
+  document.querySelector("#notification").textContent = _text
+}
+
+
+// function to turn off notification bar based on some conditions
+function notificationOff() {
+  document.querySelector(".alert").style.display = "none"
+}
+```
+Next we would be initializing some functions each time when the window load by using the function window.addEventListener(). It recieves two parameters (1) load (2) an asyn function that calls several functions.
+
+```js
+// initialization of functions when the window is loaded.
+window.addEventListener("load", async () => {
+  notification("⌛ Loading...")
+  await connectCeloWallet()
+  await getBalance()
+  await getListedSeeds()
+  notificationOff()
+  });
+```
+The async function  calls the notification function with a loading message, display the user's balance, render all seed so the user can see them, and disable the notification div again once the DApp is loaded.
+
+Next would be collecting the values of our forms we created in our modal. Firstly we get the id of our modal button, then we add an event listener to check when the button is being clicked. Next we store the values in an array called params and we use the try block to call the contract.methods.listedSeed() with the params passed inside it, then we use the catch block to handle any error that might occur. If all is succesful, we call the notification, notificationOff and  getListedSeeds function. Below is the code: 
+
+```js
+document
+  .querySelector("#listSeedBtn")
+  .addEventListener("click", async (e) => {
+
+// collecting form parameters
+    const params = [
+      document.getElementById("seedName").value,
+      document.getElementById("seedImgUrl").value,
+      document.getElementById("seedDetails").value,
+      document.getElementById("seedLocation").value,
+      new BigNumber(document.getElementById("newPrice").value)
+      .shiftedBy(ERC20_DECIMALS)
+      .toString(),
+      document.getElementById("email").value
+    ]
+    notification(`⌛ Listing your seed on the celo blockchain...`)
     try {
-      const price = new BigNumber(_price)
-        .shiftedBy(ERC20_DECIMALS).toString();
-
-
-      await contract.methods
-        .setCar(
-          _name,
-          _description,
-          _image,
-          _isUsed,
-          _isRent,
-          price
-        )
-        .send({ from: address });
-      getCars();
+      const result = await contract.methods
+        .listSeed(...params)
+        .send({ from: kit.defaultAccount })
     } catch (error) {
-      console.log(error);
+      notification(`⚠️ ${error}.`)
     }
-
-  }
+    notification(`🎉 Listing successful`)
+    notificationOff()
+    getListedSeeds()
+  })
 ```
 
 You start by creating a new BigNumber instance with the _price argument, and then it's shifting it by ERC20_DECIMALS, this is a way to represent the price in terms of smaller units. Then it's converting the value to a string and storing it in the "price" variable.
 
-Then you use the `contract.methods.setCar(..)` method to add the car to the smart contract. You also use the "send" method, passing in the user's address as the "from" property. This sends the transaction to the smart contract and adds the car to the smart contract.
 
-If the function completes successfully, it calls the "getCars()" function to retrieve the updated list of cars from the smart contract. If an error occurs, it will be caught and logged in the console.
-
-
-After this function, we would add two functions which would be to initiate the buy and the sell function in our smart contract.
+Next we would create a querySelector that target an id of marketpalce and checks for click events. This query selector enables us to display the details of a seed in a modal when the user clicks on  the view more details button:
 
 ```js
-  const buyCar = async (_price, _index) => {
-    try {
-      const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
-      const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
+document.querySelector("#marketplace").addEventListener("click", async (e) => {
+    if(e.target.className.includes("view")){
+      const _id = e.target.id;
+      let listedSeed;
 
-      const result = await cUSDContract.methods
-        .approve(contractAddress, cost)
-        .send({ from: address });
+      try {
+          listedSeed = await contract.methods.getListedSeedById(_id).call();
+          let myModal = new bootstrap.Modal(document.getElementById('addModal1'), {backdrop: 'static', keyboard: false});
+          myModal.show();
 
-      await contract.methods.buyCar(_index).send({ from: address });
-      // return result
-      getBalance();
-      getCars();
-    } catch (error) {
-      console.log({ error });
+``` 
+We first of all check if the element clicked has a class name of `view` if it is true, we declare a variable called _id to get the id of the button click. The value of the _id gotten is what will be used to fetch the details of a seed by calling the  contract.methods.getListedSeedById(_id).call(); on the try block and storing the value on the local variable called listedSeed declared in the function.
+
+On the try block also create a variable called myModal which is used to control the modal with the id `addModal1` in our html file. Through it we got the myModal.show() which is used to pop up the modal when promise is recieved.
+
+Futher more, let create the details of the modal;
+```js
+document.getElementById("modalHeader").innerHTML = `
+<div class="card">
+  <img class="card-img-top"
+  src="${listedSeed[2]}"
+  alt="image pic" style={{width: "100%", objectFit: "cover"}} />
+  <div class="card-body">
+    <p class="card-title fs-6 fw-bold mt-2 text-uppercase">${listedSeed[1]}</p>
+    <p  style="font-size : 12px;">
+      <span style="display : block;" class="text-uppercase fw-bold">Seed Description: </span>
+      <span class="">${listedSeed[3]}</span>
+    </p>
+
+
+        <p class="card-text mt-2" style="font-size : 12px;">
+          <span style="display : block;" class="text-uppercase fw-bold">Location: </span>
+          <span >${listedSeed[4]}</span>
+        </p>
+
+        <p class="card-text mt-2" style="font-size : 12px;">
+          <span style="display : block;" class="text-uppercase fw-bold">Email: </span>
+          <span >${listedSeed[6]}</span>
+        </p>
+
+        <div class="d-grid gap-2">
+          <a class="btn btn-lg text-white bg-success buyBtn fs-6 p-3"
+          id=${_id}
+          >
+            Buy for ${new BigNumber(listedSeed[5]).shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD
+          </a>
+        </div>
+  </div>
+</div>
+
+  `}
+```
+
+Inside the modal we will create a div with class card and we insert the image tag with some paragraphs. the image tag contains the image of the seed while the paragraph contains the details of the seed according to their order when fetched from the smart contract. Inside the modal is a buy button that will enable us to purchase a seed. We will implement the functionality later.
+
+
+Still in our query selector is the catch block that handles any error that may occur when interacting with our smart contract.
+
+```js
+ catch (error) {
+      notification(`⚠️ ${error}.`)
     }
-  };
-
-
-
-  const sellCar = async (index) => {
-    try {
-
-      await contract.methods.sellCar(index).send({ from: address });
-
-      getCars();
-    } catch (error) {
-      console.log({ error });
-      alert("Something went wrong");
-    }
-  };
+    notificationOff()
+  }
+})
 ```
 
-The "buyCar" function takes two arguments: _price, and _index. The function starts by creating a new cUSD contract instance using the ERC20 ABI and cUSD contract address. Then it creates a new BigNumber instance with the _price argument, and then it's shifting it by ERC20_DECIMALS, this is a way to represent the price in terms of smaller units. Then it's converting the value to a string and storing it in the "cost" variable.
+After the catch block might have handle the error by displaying it as a notification on the page, we remove the notification to for other elements to be visible.
 
-The function then uses the "cUSDContract.methods.approve(contractAddress, cost)" method to approve the spending of cUSD tokens to the contract address, passing in the cost variable as an argument, and the user's address as the "from" property.
+Next, we would be creating the buy functionalilty which will enable us to buy seeds from a farmer.
 
-The next step is using the "contract.methods.buyCar(_index)" method to buy the car on the smart contract, passing in the _index argument. And using the "send" method, passing in the user's address as the "from" property.
+```js// implements the buy functionalities on the modal
+document.querySelector("#addModal1").addEventListener("click", async (e) => {
+    if (e.target.className.includes("buyBtn")) {
 
-If the function completes successfully, it calls the `getBalance()` and `getCars()` functions to retrieve the updated balance and list of cars from the smart contract. If an error occurs, it will be caught and logged in the console.
+      // declaring variables for the smartcontract parameters
+      const index = e.target.id
+      var _price =  new BigNumber(listedSeeds[index].price)
+      var _seedName = listedSeeds[index].seedName
+      var _seedImgUrl = listedSeeds[index].seedImgUrl
+      var _email = listedSeeds[index].email
+      var _owner = listedSeeds[index].owner
 
-The "sellCar" function takes one argument: index, it's using the "contract.methods.sellCar(index)" method to make the car available for sale on the smart contract, passing in the index argument. And using the "send" method, passing in the user's address as the "from" property.
-
-If the function completes successfully, it calls the "getCars()" function to retrieve the updated list of cars from the smart contract. If an error occurs, it will be caught and logged in the console, and an alert message will appear.
-
-
-Next up will be the return statement with the following components which we would implement soon.
-
-```js
-  return (
-
-    <div className="content">
-      <Header balance={cUSDBalance} celo = {celoBalance}/>
-      <SalesCars cars={cars} buyCar = {buyCar}/>
-      <AddCar addToCars={addtoCars} />
-      <MyCar cars = {myCars} sellCar = {sellCar} />
-    </div>
-
-  );
-```
-
-## Header.js
-
-For this component, we would display the CUSD and CELO balance and also the design. Copy the code below!
-
-```js
-
-const Header = props => {
-    return (
-        <>
-            <header className="header-section">
-
-                <div className="header-bottom">
-                    <div className="container">
-                        <nav className="navbar navbar-expand-lg p-0">
-                            <a className="site-logo site-title" href="index.html"><h2>CeloDealer</h2></a>
-                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span style={{ color: "black" }} className="menu-toggle" />
-                            </button>
-                            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul className="navbar-nav main-menu mr-auto">
-
-                                    <li><a href="#">USD Balance: ${props.balance}CUSD |||| Celo Balance: ${props.celo}</a></li>
-
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>{/* header-bottom end */}
-            </header>
-            <section className="banner-section bg_img" data-background={slideImg1}>
-                <div className="container">
-                    <div className="row align-items-center">
-                        <div className="col-md-7">
-                            <div className="banner-content">
-                                <h1 className="title">Best Car Dealer</h1>
-                                <p>We offer the best car service in the city. Dont miss out on this oppurtunity to be a car owner</p>
-                                <a href="#0" className="cmn-btn">Sell/Rent your car</a>
-                            </div>
-                        </div>
-                        <div className="col-md-5">
-                            <div className="banner-img">
-                                {/* <img src=alt="image" /> */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </>
-
-    );
-}
-
-export default Header
-```
+      notification("⌛ Waiting for payment approval...")
 
 
-## SalesCars.js
-
-This would represent the cars which are for sale. It checks if the item is for sale using the properties passed from App.js. If the item is for sale, we would display the item. 
-
-```js
-
-const SalesCars = props => {
-
-    return (
-        <>
-            <section className="choose-car-section pt-120 pb-120 section-bg">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-6">
-                            <div className="section-header text-center">
-                                <h2 className="section-title">Cars for Sale</h2>
-                                <p> Look through our equisite selection of cars and get one that fits your choice</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-
-                        {props.cars.map(car => ( car.isBought === false) && <div className="car-item col-lg-4 col-md-6 col-sm-12">
-                            <div className="thumb">
-                                <img src={car.carImage} alt="item" />
-                            </div>
-                            <div className="car-item-body">
-                                <div className="content">
-                                    <h4 className="title">{car.carName}</h4>
-                                    <span className="price">Price:${car.price / 10 ** 17}</span>
-                                    <p>{props.car.carDescription}</p>
-                                    <a onClick={() => props.buyCar(car.price / 10 ** 17, car.index)} className="cmn-btn">Buy Car</a>
-                                </div>
-                                <div className="car-item-meta">
-                                    <ul className="details-list">
-                                        <li><i className="fa fa-sliders" />{(car.isUsed === 'true' || car.isUsed === true) ? 'Used' : 'New'}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>)}
-
-                    </div>
-                </div>
-            </section>
-
-            <section className="features-section">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-6">
-                            <div className="section-header text-center">
-                                <h2 className="section-title">our awesome features</h2>
-                                <p>These is what makes us at CeloDealer special</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row mb-none-30">
-                        <div className="col-lg-4 col-sm-6">
-                            <div className="icon-item text-center">
-                                <div className="icon"><i className="fa fa-user" /></div>
-                                <div className="content">
-                                    <h4 className="title">New/Used Cars</h4>
-                                    <p>We offer you the choice to choose between used and new cars</p>
-                                </div>
-
-                            </div>
-                        </div>{/* icon-item end */}
-                        <div className="col-lg-4 col-sm-6">
-                            <div className="icon-item text-center">
-                                <div className="icon"><i className="fa fa-rocket" /></div>
-                                <div className="content">
-                                    <h4 className="title">fast services</h4>
-                                    <p>All our services are time and speed efficent </p>
-                                </div>
-                            </div>
-                        </div>{/* icon-item end */}
-                        <div className="col-lg-4 col-sm-6">
-                            <div className="icon-item text-center">
-                                <div className="icon"><i className="fa fa-volume-control-phone" /></div>
-                                <div className="content">
-                                    <h4 className="title">customer support</h4>
-                                    <p>We offer 24/7 customer support </p>
-
-                                </div>
-                            </div>
-                        </div>{/* icon-item end */}
-                    </div>
-                </div>
-            </section>
-
-        </>
-
-
-    );
-}
-
-export default SalesCars;
-```
-
-## MyCar.js
-This component would be used to retrieve the user's bought  cars on the frontend
-
-```js
-const MyCar = props => {
-    return (
-        <>
-            <section className="choose-car-section pt-120 pb-120 section-bg">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-6">
-                            <div className="section-header text-center">
-                                <h2 className="section-title">Bought Cars</h2>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-
-                        {props.cars.map(car => <div className="car-item col-lg-4 col-md-6 col-sm-12">
-                            <div className="thumb">
-                                <img src={car.carImage} alt="item" />
-                            </div>
-                            <div className="car-item-body">
-                                <div className="content">
-                                    <h4 className="title">{car.carName}</h4>
-                                    <span className="price">Price:${car.price / 10 ** 17}</span>
-                                    <p>{car.carDescription}</p>
-                                    {(car.isBought === true) ? <div>
-                                        <a onClick={() => props.sellCar(car.index)} className="cmn-btn">Sell Car</a>
-                                    </div> : <p>This car is bought!!</p>}
-
-                                </div>
-                                <div className="car-item-meta">
-                                    <ul className="details-list">
-                                        <li><i className="fa fa-car" />model 2014ib</li>
-                                        <li><i className="fa fa-tachometer" />32000 KM</li>
-                                        <li><i className="fa fa-sliders" />auto</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>)}
-
-                    </div>
-                </div>
-            </section>
-            <div className="footer-bottom" style={{ backgroundColor: "#363636" }}>
-                <div className="container">
-                    <div className="row justify-content-between">
-                        <div className="col-sm-6">
-                            <p className="copy-right-text"><a href="#">CeloDealer</a></p>
-                        </div>
-                        <div className="col-sm-6">
-                            <ul className="payment-method d-flex justify-content-end">
-                                <li>We accept</li>
-                                <li><img src={"put your own image"} alt="one" /></li>
-                                <li><img src={"put your own image"} alt="two" /></li>
-                                <li><img src={"put your own image"} alt="three" /></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
-}
-
-export default MyCar;
-```
-
-## AddCar.js
-This component is used to add a car to the smart contract. The convertToBool function is a helper function that is used to convert a string to boolean.
-```js
-import { useState } from 'react';
-
-const AddCar = props => {
-
-    const [name, setName] = useState('');
-    const [image, setImage] = useState('');
-    const [price, setPrice] = useState();
-    const [isUsed, setIsUsed] = useState('false');
-    const [description, setDescription] = useState('')
-
-    const submitHandler = (event) => {
-        event.preventDefault();
-        props.addToCars(name, description, image, price, isUsed);
-        setName('');
-        setImage('');
-        setPrice('');
-        setDescription('');
-    }
-    const convertToBool = (text)=>{
-        if(text === 'true'){
-          return true
-        }else if(text === 'false'){
-          return false;
-        }
+      try {
+        await approve(listedSeeds[index].price)
+      } catch (error) {
+        notification(`⚠️ ${error}.`)
       }
 
-    return (
-
-        <section id = "0" className=" pt-120 pb-120">
-            <div className="container">
-                <div className="section-header text-center">
-                    <h2 className="section-title">Add Car</h2>
-                    {/* <p> Look through our equisite selection of cars and get one that fits your choice</p> */}
-                </div>
-                <form className="reservation-form" onSubmit = {submitHandler}>
-                    <div className="content-block">
-                    </div>
-                    <div className="content-block">
-                        <div className="row">
-                            <div className="col-lg-6 form-group">
-                                <input type="text" placeholder="Name" required value = {name} onChange = {(e)=>setName(e.target.value)}/>
-                            </div>
-                            <div className="col-lg-6 form-group">
-                                <input type="text" placeholder="Image URL" required value = {image} onChange = {(e)=>setImage(e.target.value)}/>
-                            </div>
-                            <div className="col-lg-6 form-group">
-                                <input type="number" placeholder="Price" required value = {price} onChange = {(e)=>setPrice(e.target.value)} />
-                            </div>
-                            <div className="col-lg-6 form-group">
-                                <select onChange = {(e)=>setIsUsed(convertToBool(e.target.value))}>
-                                    <option>is Used</option>
-                                    <option value = "true">True</option>
-                                    <option value = "false">False</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="content-block">
-                        <div className="row">
-                            <div className="col-lg-12 form-group">
-                                <textarea value = {description} placeholder="Car Description" onChange = {(e)=>setDescription(e.target.value)} />
-                            </div>
-                            <div className="col-lg-12">
-                                <button type="submit" className="cmn-btn">Add your Car</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-    );
-}
-
-export default AddCar;
 ```
+
+We start by using a query selector to target the id addModal1 which is the id of the modal that shows the details of a seed. In that modal is a buy button with a class name of "buyBtn". We use the if condition to ensure that the element that we clicked on should have a class name of `buyBtn` before executing the next line of instruction. 
+
+In the next line of instruction we are going to create 6 variables. The first variable stores the id which is a numeric value of the targeted button,  while the rest of the variables gets the details of that seed in the global array according to the id passed.
+
+The next line pop  a notification to tell the user that their request is being processed after which we are going to use a try block to approve the price of the seed we intend to buy by calling the approve method and passing the price of the seed as its parameter.
+
+
+After payment is being approved we are going to display another notification let the user know that we are waiting for their confirmation. Then we are going to use a try block to call the buySeed function of our smart contract.
+```js
+notification(`⌛ Awaiting payment for "${listedSeeds[index].seedName}"...`)
+      try {
+        const result = await contract.methods
+          .buySeed(index, _owner, _seedName, _seedImgUrl, _price, _email)
+          .send({ from: kit.defaultAccount })
+        notification(`🎉 You successfully bought "${listedSeeds[index].seedName}".`)
+        getListedSeeds()
+        getBalance()
+      } catch (error) {
+        notification(`⚠️ ${error}.`)
+      }
+
+      notificationOff()
+    }
+
+  })
+```
+
+The buySeed function contains parameter such as the index of the seed, owner, seed name, price and email and then it send the transaction. If it is successful, it notify the user and then call the getListedSeeds and getBalance function. If there is an error it will also alert the user the error. After everything is processed we are going to ensure that the notification is turned off by calling the notificationOff function.
+
+Up next we are going to create a query selector that will target the tab id and checks for the button is being clicked. This buttons is what enables us to toggle between seed listed on the blockchain and seed bought buy the user.
+
+```js
+document.querySelector("#tabs").addEventListener("click", async (e) => {
+      if (e.target.className.includes("showpurchased")) {
+        document.getElementById("marketplace").classList.add("d-none");
+        document.getElementById("purchasedProduct").classList.remove("d-none");
+        document.getElementById("productTab").classList.remove("active", "bg-success");
+        document.getElementById("purchasedTab").classList.add("active", "bg-success");
+
+        var result;
+
+        notification(`⌛ Loading please wait ...`)
+```
+
+The if condition is to check if the button click has a class of `showpurchased`. If it is true it will use the document.getElementById to add and remove class list from the element whose id is used. This will enable us to toggle the view between the seed listed and the seed purchased.
+
+Next we are going to create a variable called result, this will be used to store the seed purchased when we call the smart contract.
+
+The notification function gives the user the impression that something is processing and they should wait for it.
+
+Up next we are going to create a try block that will fetch the seed purchased by that user.
+```js
+try {
+           result = await contract.methods.getPurchasedSeeds().call();
+
+           notificationOff()
+          if (result.length) {
+            document.getElementById(`purchasedProduct`).innerHTML = ``
+        result.forEach((item) => {
+          var timestamp= parseInt(item[3])
+
+// converts timestamp to milliseconds.
+var convertToMilliseconds = timestamp * 1000;
+
+// create an object for it.
+var date = new Date(convertToMilliseconds);
+```
+The try block firstly calls the getPurchasedSeeds from the smart contract and stores the promise in the result variable we created. notificationOff turns off the notification. After that we have to check if the result list is not empty. If true we get the innerHTML of the id  `purchasedProduct` and set it to be empty because we are going to render some html template in it using the forEach loop later on. Before rendering, we need to convert each timestamp that is fetch into a format that can understood by the user. 
+
+
+Up next we create a template that will render the purchased seeds
+```js
+//template that shows purchased seeds
+                document.getElementById(`purchasedProduct`).innerHTML +=
+                `
+                <div class="card col-md-12  mb-4">
+                <div class="card-body row">
+                <div class="col-md-4">
+                <img
+                src="${item[2]}" alt="image pic" style="width: 100%; objectFit: cover; height :150px;" />
+
+                <div class="translate-middle-y position-absolute bottom-25 start-2" >
+                ${identiconTemplate(item[0])}
+                </div>
+                    </div>
+
+                    <div class="col-md-8">
+                    <p class="card-text mt-2 d-flex justify-content-between" style="font-size : 12px;">
+                      <span style="display : block;" class="text-uppercase fw-bold">Seed Name: </span>
+                      <span >${item[1]}</span>
+                    </p>
+
+
+                    <p class="card-text mt-2 d-flex justify-content-between" style="font-size : 12px;">
+                      <span style="display : block;" class="text-uppercase fw-bold">Price: </span>
+                      <span >${new BigNumber(item[4]).shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD</span>
+                    </p>
+
+                    <p class="card-text mt-2 d-flex justify-content-between" style="font-size : 12px;">
+                      <span style="display : block;" class="text-uppercase fw-bold">Date Purchased: </span>
+                      <span >${date.getHours() + ":" + date.getMinutes() + ", "+ date.toDateString()}</span>
+                    </p>
+
+                    <p class="card-text mt-2 d-flex justify-content-between"
+                    style="font-size : 12px;">
+                      <span style="display : block;"
+                      class="text-uppercase fw-bold">Email: </span>
+                      <span >${item[5]}</span>
+                    </p>
+                      </div>
+                    </div>
+                  </div>`
+                  ;
+              })
+      } 
+```  
+
+The template contain a card that is rendered in the purchasedProduct id. It contains various p tags with their neccessary informations,  and image tag to display the image and the identiconTemplate icon that shows the address of the user purchased from in form of an icon. the item promise is being used according to how it is arranged in the smart contract.
+
+
+Next we are going to handle when the result is empty after the promise is being returned.
+
+```js
+ else{
+        document.getElementById(`purchasedProduct`).innerHTML = `<p class="text-center">
+        you haven't purchased any seed yet</p>`;
+      };
+
+        } catch (error) {
+          notification(`⚠️ ${error}.`)
+        }
+        notificationOff()
+        getListedSeeds()
+
+      }
+```
+The innerHTML of the id purchaseProduct is replaced with the text "you haven't purchased any seed yet" and a catch block is used to handle errors and display them.
+
+After all is resolve we are going to turn off the notifications and call the getListedSeeds function.
+
+Next we going to handle the toggle button that shows the listed seeds.
+
+```js
+// toggles the view on the web page
+      else if (e.target.className.includes("showProducts")) {
+        document.getElementById("marketplace").classList.remove("d-none");
+        document.getElementById("purchasedProduct").classList.add("d-none");
+        document.getElementById("productTab").classList.add("active", "bg-success");
+        document.getElementById("purchasedTab").classList.remove("active", "bg-success");
+      }
+})
+```
+We use the else if to check if the button clicked contain the class name `showproducts`. if it contains, we are going to remove and add some styles in the web page by using the .classList.add() function for add and .classList.remove() to remove a class.
 
 Now try to compile your react dapp to see if it is working fine. If it is, you can deploy your dapp on github pages  or netlify.
 You can follow or use this project as a reference to edit yours and get the required files, images e.t.c. <https://github.com/dahnny/cardealer-tutorial>
