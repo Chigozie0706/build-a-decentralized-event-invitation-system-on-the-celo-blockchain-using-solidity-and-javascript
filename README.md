@@ -1,16 +1,16 @@
-# How to build a decentralized event invitation system on the Celo blockchain using Solidity and Javascript 
+# How To Build a Decentralized Event Invitation System on the Celo Blockchain Using Solidity and Javascript
 
 ## Introduction
 
-Over the years, event invitation systems have moved from just normal paper to digital cards which can be used in web2 web applications. In this era of web3 development, why not build a decentralized system that will invite people to an event on the blockchain? Celo is one of the fast leading blockchains and in our tutorial will be building our app on Celo.
+Over the years, event invitation systems have moved from just normal paper to digital cards which can be used in web2 web applications. In this era of web3 development, why not build a decentralized system that will invite people to an event on the blockchain such as Celo? Celo is one of the fast leading blockchains and in our tutorial will be building our app on Celo.
 
-### Celo
+## What is the Celo Blockcchain
 
 Celo is a blockchain project focused on making crypto payments as easy as possible. Instead of having to manage complex crypto addresses, users can send cryptocurrencies using mobile phone numbers. 
 
-Sending the platform’s stablecoin, Celo Dollars is even possible for users who do not have the Celo app. Users can send value via WhatsApp too. To access this value, however, recipients would eventually need to download the application.
+Celo Dollars(cUSD), the platform’s stablecoin can be sent by users to other users. Users who do not have the Celo app can receive cUSD via whatsapp. To access these funds, recipients would eventually need to download the application.
  
-### What will you get from this tutorial 
+## What will you get from this tutorial 
 
 1. You will learn how to write smart contract using Solidity.
 2. Deploy the smart contract on the Celo blockchain using Remix IDE.
@@ -18,11 +18,11 @@ Sending the platform’s stablecoin, Celo Dollars is even possible for users who
 
 ## Prerequisites
 
-Before procceding with this tutorial you need to have the following basic knowledge on:
+Before proceeding with this tutorial you need to have the following basic knowledge on:
 
--  Blockchain.
--  Smart contract development.
--  Solidity.
+-  [Blockchain](https://en.wikipedia.org/wiki/Blockchain).
+-  [Smart contract](https://www.investopedia.com/terms/s/smart-contracts.asp#:~:text=Smart%20contracts%20are%20code%20written,parties%20to%20trust%20each%20other.) development.
+-  [Solidity](https://docs.soliditylang.org/#:~:text=Solidity%20is%20an%20object%2Doriented,C%2B%2B%2C%20Python%20and%20JavaScript.).
 -  Remix IDE.
 -  How to use the git CLI (Command Line Interface).
 -  HTML and Javascript.
@@ -42,9 +42,9 @@ Here is a demo of what we are about to build:
 
 [Demo Link](https://chigozie0706.github.io/ceAffairs/)
 
-## Section1 : Building our Smart Contract using Solidity
+## Section 1: Building Our Smart Contract Using Solidity
 
-In this section, we will build our smart contract for the blockchain using Solidity. Before going into details we need to be on the Remix IDE. Click [here](http://remix.ethereum.org/) to navigate to Remix.
+In this section, we will build our smart contract for the blockchain using Solidity. Before going into details, navigate to [Remix IDE](http://remix.ethereum.org/) in your browser.
 
 This is a preview of the Remix IDE:
 
@@ -52,7 +52,7 @@ This is a preview of the Remix IDE:
 
 On the Remix IDE, click on the `contracts` folder. That is the place we will write all our smart contracts. 
 
-Next inside the contract folder, let's create our smart contract file called `CeAffairs` with the solidity extension `.sol`. 
+Next inside the contract folder, let's create our smart contract file called `CeAffairs.sol`. 
 
 Our first line of code for the smart contract is:
 
@@ -61,7 +61,7 @@ Our first line of code for the smart contract is:
 pragma solidity >=0.7.0 <0.9.0;
 ```
 
-The SPDX (Software Package Data Exchange) is a simple way to state the license that applies to a source code or documentation file, in our case `MIT`. 
+The [SPDX(Software Package Data Exchange)](https://spdx.org/licenses/) is a simple way to state the license that applies to a source code or documentation file, in our case `MIT`. 
             
 The `pragma` specify the Solidity version we want the compiler to use. We would want the version to be between `0.7.0` and `0.9.0`. 
 
@@ -90,19 +90,20 @@ Up next, we are going to create a `struct` called `Event`. Structs are a collect
       uint   eventDate;
       string eventTime;
       string eventLocation;
+      }
 ```
 
-In our code above, the our struct consist of the following variables:
+In our code above, our struct consists of the following variables:
 
-1. `owner` : it stores the address of an event owner and its of data type `address`.
-2. `eventName`: it stores the name of the event and its of data type `string`.
-3. `eventCardImgUrl` : it stores the event card image and its of data type `string`.
-4. `eventDetails` : it stores the details of the event and its of data type `string`.
-5. `eventDate` : it stores the event date and its of data type `uint`.
-6. `eventTime` : it stores the event time and its of data type `string`.
-7. `eventLocation` : it stores the event location and its of data type `string`.
+- `owner`: It stores the address of an event owner and it's of data type `address`.
+- `eventName`: It stores the name of the event and it's of data type `string`.
+- `eventCardImgUrl`: It stores the event card image and it's of data type `string`.
+- `eventDetails`: It stores the details of the event and it's of data type `string`.
+- `eventDate`: It stores the event date and it's of data type `uint`.
+- `eventTime`: It stores the event time and it's of data type `string`.
+- `eventLocation`: It stores the event location and i'ts of data type `string`.
 
-After creating our Event struct, we need to create 3 `mapping`. To store multiple values. A `mapping` is like an object in Javascript that has a key and value.
+After creating our `Event` struct, we need to create 3 `mapping`. To store multiple values. A `mapping` is like an object in Javascript that has a key and value.
 
 To create a `mapping`, you use the keyword `mapping` and assign a key type to a value type.
 
@@ -117,16 +118,16 @@ To create a `mapping`, you use the keyword `mapping` and assign a key type to a 
     mapping(uint => mapping(address => bool)) public attendanceCheck;
 ```
 
-- The first `mapping` stores multiple events listed on the blockchain. Your key would be an integer `uint` and the value would be the struct `Event` and the variable is `events`.
+- The `events` mapping stores multiple events listed on the blockchain. Your key would be an integer `uint`, the value would be the struct `Event` and the variable is `events`.
 
-- The second `mapping` stores the addresses of users that are going to attend a particular event. The key is the integer `uint256`, while the value is an array that stores only the addresses of the users.
+- The `eventAttendees` mapping stores the addresses of users that are going to attend a particular event. The key is the integer `uint256`, while the value is an array that stores only the addresses of the users.
 
-- The third `mapping` checks if a user is already an attendee of a particular event to avoid spamming an event.
+- The ` attendanceCheck` mapping checks if a user is already an attendee of a particular event to avoid spamming an event.
 
 Next, we are going to create a function where a user can create or list an event on the blockchain. 
 
 ```solidity
-   // Function to create  an event.
+   // Function to create an event.
     function createEvent(string memory _eventName, string memory _eventCardImgUrl,
     string memory _eventDetails, uint  _eventDate, 
     string memory _eventTime, string memory _eventLocation) public {
@@ -137,14 +138,21 @@ Next, we are going to create a function where a user can create or list an event
 }
 ```
 
-The function above takes six parameters which are `_eventName`, `_eventCardImgUrl`, `_eventDetails`, `_eventDate`, `_eventTime`, and `_eventLocation`. The parameter has a prefix `_` which is used to differentiate it from its struct value. The function has its visibility type set to public.  
+The function above takes six parameters which are:
+- `_eventName`
+- `_eventCardImgUrl`
+- `_eventDetails`
+- `_eventDate`, 
+- `_eventTime`
+- `_eventLocation`. 
+The parameters has a prefix `_` which is used to differentiate it from its struct value. The function has its visibility type set to public.  
 
-A new event is then added to the events `mapping` by using the initial length of the event which we created above called `eventLength` as a key to store a new Event struct with the specified information. The owner of the event is stored using the `msg.sender` keyword, then we increment the `eventLength` by 1 for the next event to be created.
+A new event is then added to the `events` mapping by using the initial length of the event which we created above called `eventLength` as a key to store a new Event struct with the specified information. The owner of the event is stored using the `msg.sender` keyword, then we increment the `eventLength` by 1 for the next event to be created.
 
-Up next, we are going to create a function that will return the information of a particular event when the `_index` of that event is being passed. The function will be declared `public view` meaning that it is going to be public and we not modifying anything rather we are only to return some values. 
+Next, we are going to create a function that will return the information of a particular event when the `_index` of that event is being passed. The function will be declared `public view` meaning that it is going to be public and we not modifying anything rather we are only to return some values. 
 
 ```solidity
-    // Function to get a event through its id.
+    // Function to get an event through its id.
     function getEventById(uint _index) public view returns (
         address,
         string memory,
@@ -169,9 +177,16 @@ Up next, we are going to create a function that will return the information of a
 
 ```
 
-The function will return the address of the `owner`, `eventName`, `eventCardImgUrl`, `eventDetails`, `eventDate`, `eventTime` and the `eventLocation`.
+The function will return:
+- the address of the `owner`
+- `eventName`
+- `eventCardImgUrl`
+- `eventDetails`
+- `eventDate`
+- `eventTime` 
+- `eventLocation`
 
-Up next, we are going to create a function called `deleteEventById` that will allow an event owner deletes his or her event.  
+Next, we are going to create a function called `deleteEventById` that will allow an event owner deletes his or her event.  
 
 ```solidity
 
@@ -183,7 +198,7 @@ function deleteEventById(uint _index) public {
 
 ```
 
-The function takes a parameter `_index` and it's set to public. The body of the function uses the `require` method. The `require` method is used to ensure that a particular condition is being met before moving to the next line of code. 
+The function takes a parameter `_index` and it's set to public. The body of the function uses the `require` method. The `require` method is used to ensure that a particular condition is met before moving to the next line of code. 
 
 In our `require` method, we are going to ensure that the address of the user calling the function is the owner of that event. If the condition is false, it will throw an error with the keyword `"you are not the owner"`. If the condition is true,  it will delete the event in the events `mapping` through its index.
 
@@ -205,9 +220,10 @@ Up next we are going to create a function called `addEventAttendees` which will 
 
 The function takes parameters `_index` and its `visibility` is set to public. 
 
-It uses two `require` methods. The first `require` method ensures that the entry date of that particular event has not expired by making a comparison with the current timestamp. 
+It uses two `require` methods:
+- The first `require` method ensures that the entry date of that particular event has not expired by making a comparison with the current timestamp. 
 
-The second `require` method is to ensure the attendance check of a user is false. 
+- The second `require` method is to ensure the attendance check if a user is false. 
 
 If the two `require` conditions are being met, it sets the `attendanceCheck` of that user to be true and stores the user `address` in an array that is stored in a `mapping`.
 
@@ -270,7 +286,7 @@ contract CeAffairs{
     mapping(uint => mapping(address => bool)) public attendanceCheck;
 
 
-    // Function to create  an event.
+    // Function to create an event.
     function createEvent(string memory _eventName, string memory _eventCardImgUrl,
     string memory _eventDetails, uint  _eventDate, 
     string memory _eventTime, string memory _eventLocation) public {
@@ -319,7 +335,7 @@ function deleteEventById(uint _index) public {
     
     }
 
-//function to get list of event attendees by event id.
+//function to get the list of event attendees by event id.
     function getAttendees(uint256 _index) public view returns (address[] memory) {
         return eventAttendees[_index];
     }
@@ -337,22 +353,22 @@ Congrats! you just created your event smart contract.
 
 Up next is to deploy that smart contract on the Celo blockchain.
 
-## Contract Deployment
+### Contract Deployment
 
 To deploy the contract, we would need to:
 
-1. Download the Celo extension wallet [here]((https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en)) and create an account.
+1. Download the Celo extension wallet [here](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en) and create an account.
 2. Switch to the alfajores testnet and fund your wallet [here](https://celo.org/developers/faucet) 
 3. Download and activate the Celo plugin from the Remix plugin manager. 
-4. Save and compile your `CeAffairs.sol`, take note of the Abi at the bottom of the compile section.
+4. Save and compile your `CeAffairs.sol`, take note of the  [Application Binary Interface(ABI)](https://www.alchemy.com/overviews/what-is-an-abi-of-a-smart-contract-examples-and-usage) at the bottom of the compile section.
 5. Click on the Celo plugin, connect your, wallet and deploy the smart contract.
  
-NB: ensure you save the `address` the smart contract is deployed to for future reference. 
+NB: ensure you save the `address` the smart contract is deployed to for future reference. This address is thr contract address.
 
 
-## Section2: Building our Frontend for the DApp
+## Section 2: Building Our Frontend for the DApp
 
-Up next, we are going to build a User Interface (UI) to interact with our smart contract. You need to make sure you have installed Node.js 10 or higher version.
+Up next, we are going to build a User Interface (UI) to interact with our smart contract. You need to make sure you have installed **Node.js 10** or a higher version.
 
 To make our work easier let's clone a boilerplate 
 
@@ -374,25 +390,25 @@ Up next, we are going to install all the dependencies in the `package.json` of o
 npm install
 ```
 
-Installing of all dependencies might take a while. After the dependencies have been installed, we can start up the local server by running the code:
+Installing all dependencies might take a while. After the installation of dependencies, we can start up the local server by running the code:
 
 ```bash
 npm run dev
 ```
 
-Your project should be running here **http://localhost:3000/** and a browser window should pop up showwing "hello world".
+Your project should be running here **http://localhost:3000/** and a browser window should pop up showing "hello world".
 
-After starting the server we need to open the `celo-event-boilerplate` folder which is the root folder in an IDE, `VScode` or `Atom` recommended.
+After starting the server we need to open the `celo-event-boilerplate` folder which is the root folder of our IDE. `VScode` or `Atom` is the recommended IDE.
 
 Up next, we need to copy our `CeAffairs.sol` from Remix and paste it into the `event.sol` file in our boilerplate, copy the ABI also from Remix, and paste it into our `event.abi.json` file. 
 
 NB: the `address` to which the smart contract is being deployed to will be used later.
 
-## The HTML part of the DApp (index.html)
+### The HTML part of the DApp (index.html)
 
 Up next, in our boilerplate, let's open the public folder and the `index.html` file. This is where we are going to build our user interface (UI) so that the user can see a way of interacting with our smart contract. 
 
-Firstly we need to write this line of code below: 
+First, we need to write this line of code below: 
 
 ```html
 <!DOCTYPE html>
@@ -403,11 +419,11 @@ Firstly we need to write this line of code below:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
 
-The code above declares the document type, adds an HTML tag, creates a head element, and adds `meta` tags.
+- The code above declares the document type, adds an HTML tag, creates a head element, and adds `meta` tags.
 
-The first `meta` tag defines the `character-set` (encoding) we will be using.
+- The first `meta` tag defines the `character-set` (encoding) we will be using.
 
-The second `meta` tag defines the responsiveness of the web page.
+- The second `meta` tag defines the responsiveness of the web page.
 
 Next, we will be importing some external files using the `link` tag.
 
@@ -433,11 +449,11 @@ Next, we will be importing some external files using the `link` tag.
     />
 ```
 
-The first `link` tag is used to import the Bootstrap library which helps in creating a more easier and responsive User Interface (UI).
+- The first `link` tag is used to import the Bootstrap library which helps in creating a more easier and responsive User Interface (UI).
 
-The second `link` is used to import Google font for our text.
+- The second `link` is used to import Google font for our text.
 
-The third `link` is used to import Bootstrap icons.
+- The third `link` is used to import Bootstrap icons.
 
 Up next, we would be using the `style` tag to import our main font. The style tag also contains some CSS styles that can be used globally.
  
@@ -486,11 +502,11 @@ Next, let's define our `body` tag. Inside the body tag, the first component we w
  <!-- Navbar ends here -->
 ``` 
 
-Tha navbar is created with a bootstrap component of `nav`. It has some Bootstrap `class` for styling the navbar and it contains two `span` for displaying the name of the dApp and also the amount of cUSD a user have.
+The navbar is created with a bootstrap component of `nav`. It has some Bootstrap `class` for styling the navbar and it contains two `span` for displaying the name of the dApp and also the amount of cUSD a user have.
 
 For now, the default amount is 0. Later on, we are going to import the actual amount of a user through the `id` of the `span` tag using our Javascript.
 
-Next, we are going to create a hero that will tell the users what the dApp is all about and the users can also post an event by clicking a button that will pop up a modal that will contain a form for creating an event.
+Next, we are going to create a hero that will tell the users what the DApp is all about and the users can also post an event by clicking a button that will pop up a modal that will contain a form for creating an event.
 
 
 ```html
@@ -504,7 +520,7 @@ Next, we are going to create a hero that will tell the users what the dApp is al
  <!--section ends here -->
 ``` 
 
-Up next we are going to create a div that shows notifications to the users and a `main` tag that will show the list of events that is already created by the user.
+Up next we are going to create a `div` that shows notifications to the users and a `main` tag that will show the list of events that is already created by the user.
 
 ```html
  <!-- Start of container holding list of events -->
@@ -526,7 +542,7 @@ Up next we are going to create a div that shows notifications to the users and a
 <!-- End of container holding list of events -->
 ```
 
-In the div for the notification we are going to set an id `notification`. This id will be used to render dynamic notification text to the user. Also, for the `main` tag we are going to set an id of `eventPage` which will be used in our main.js file to render events created by users.
+In the `div` for the notification, we are going to set an id `notification`. This id will be used to render dynamic notification text to the user. Also, for the `main` tag we are going to set an id of `eventPage` which will be used in our **main.js** file to render events created by users.
 
 Next, we will be creating a `div` element that will pop up a modal which will be used to view the details of an event created, and also a user can use it to attend that event.
 
@@ -923,7 +939,7 @@ Below is the full source code for the index.html file:
 
 ```
 
-## The Javascript of the DApp (main.js) file
+### The Javascript of the DApp (main.js)
 
 Up next, we are going to write our Javascript code in the `main.js` file to connect the HTML file to the smart contract. You can locate the `main.js` file in the `src` folder of our boilerplate.
 
@@ -936,13 +952,13 @@ import { newKitFromWeb3 } from "@celo/contractkit"
 import eventPlaceAbi from "../contract/event.abi.json"
 ```
 
-In the first import, we are going to import Web from `web3`. `web3.js` is a popular collection of libraries also used for Ethereum that allows you to get access to a web3 object and interact with the node's JSON RPC API.
+In the first import, we are going to import Web from `web3`. `web3.js` is a popular collection of libraries also used for Ethereum that allows you to get access to a web3 object and interact with the node's [JSON RPC](https://www.jsonrpc.org/) API.
 
 Next, we are going to import `newKitFromWeb3` from the "@celo/contractkit". The `contractkit` library enables us to interact with the Celo blockchain.
 
 Next, we are going to import our `eventPlaceAbi` code from the contract folder. The ABI (Application Binary Interface) provides an interface to enable us to interact with our smart contract that is being deployed in bytecode.
 
-To get the ABI bytecode from Remix, you need to go to the compile section, compile the code and click on the Abi `icon` to copy the byte code, then you paste the byte code in the `event.abi.json` file in our contract folder.
+To get the ABI bytecode from Remix, you need to go to the compile section, compile the code and click on the ABI `icon` to copy the byte code, then you paste the byte code in the `event.abi.json` file in our contract folder.
 
 We also need to copy the smart contract and paste it into the `event.sol` file of our contract folder.
 
@@ -1007,7 +1023,7 @@ If the `window.celo` object does exist, a notification will be sent to the user 
 
 Next, we use a `try` block to call the `window.celo.enable()` function. This function, will open a pop-up dialogue in the UI and ask for the user's permission to connect the DApp to the CeloExtensionWallet and then turn off the notification.
 
-Next, after the user approves the dApp, we are going to create a web3 object using the `window.celo` object as the provider. This web3 object can then be used to create a new kit instance, which will be saved to the kit state. This kit instance will have the functionality to interact with the smart contract.
+Next, after the user approves the DApp, we are going to create a web3 object using the `window.celo` object as the provider. This web3 object can then be used to create a new kit instance, which will be saved to the kit state. This kit instance will have the functionality to interact with the smart contract.
 
 After creating the new kit instance, use the method `kit.web3.eth.getAccounts()` to get an array of the connected user's `addresses`. Use the first address from this array and set it as the default user address by using `kit.defaultAccount`. This will allow the address to be used globally in the dApp.
 
@@ -1107,9 +1123,9 @@ else {
 }
 ```
 
-In the function, we are going to get the id where we need to render our HTML template which we are going to create later and make empty to avoid duplicate rendering of events.
+In the function, we are going to get the id that we need to render our HTML template, which we are going to create later and make empty to avoid duplicate rendering of events.
 
-Next, we use an if condition to check if the `eventLists` is not empty, then we use a forEach loop to check if the owner of an event exists. If true, we are going to create a new div, give that div some class style, insert the `eventTemplate` which we will be creating later, and then append the div to an id `eventplace`.  
+Next, we use an `if` condition to check if the `eventLists` is not empty, then we use a `forEach` loop to check if the owner of an event exists. If true, we are going to create a new `div`, give that div some class style, insert the `eventTemplate` which we will be creating later, and then append the div to an id `eventplace`.  
 
 Up next we are going to create the `eventTemplate` function which will receive a parameter `event`.
 
@@ -1189,9 +1205,9 @@ function identiconTemplate(_address) {
 }
 ```
 
-The function has a constant variable `icon` which is an object that contains the user address and some values. The function also returns a div that has an image tag with its src set to the variable icon declared at the top of the function.
+The function has a constant variable `icon` which is an object that contains the user address and some values. The function also returns a div that has an image tag with its `src` set to the variable icon declared at the top of the function.
 
-Up next, we are going to create 2 functions that will display notifications to the user and also remove that notifications.
+Up next, we are going to create 2 functions that will display notifications to the user and also remove those notifications.
 
 
 ```js
@@ -1208,7 +1224,7 @@ function notificationOff() {
 }
 ```
 
-The first function `notification` displays a notification to the user by accepting a parameter and using the class `.alert` and id `notification` to display text on the web page.
+The first function `notification` displays a notification to the user by accepting a parameter and using the class `alert` and id `notification` to display text on the web page.
 
 The second function `notificationOff` removes the notification from the screen.
 
@@ -1269,11 +1285,11 @@ document
   })
 ```
 
-In the code above is a query selector that checks for the id `postEventBtn` and add an event listener to check if an on-click event has happened. 
+In the code above is a query selector that checks for the id `postEventBtn` and adds an event listener to check if an on-click event has happened. 
 
 In the next line, we get the `eventDate` value from the form and convert it to a timestamp in seconds, then we create an array that will hold all values in the form.
 
-Next, we notify the user that their request is processing and then we use the try block to call our smart contract method `createEvent`, and we pass the params as a parameter to it, then we use the `send` method with the user address as a parameter because we want to write to the smart contract.
+Next, we notify the user that their request is processing. We then use the try block to call our smart contract method `createEvent`. Afterward, we pass the params as a parameter to it, then we use the `send` method with the user address as a parameter because we want to write to the smart contract.
 
 The catch block is used to catch any error that might occur during the transaction.
 After all is successful we notify the user, turn off the notification and call the `getEventLists` method.
@@ -1307,15 +1323,14 @@ document.querySelector("#eventplace").addEventListener("click", async (e) => {
 
 ```
 
-In the query selector, we have an if statement which checks if a button clicked has a class name of `deleteBtn`. If true, it will get the id of that button and assign it to a local variable called index. Next is to display a notification to the user for they to know that their request is processing.
+In the query selector, we have an `if` statement, which checks if a button clicked has a class name of `deleteBtn`. If true, it will get the id of that button and assign it to a local variable called index. Next is to display a notification to the user to know that their request is processing.
 
 Still on the if statement,  we are going to use a try block to call our smart contract function `deleteEventById` in the function, we are going to pass a parameter `index` which is the local variable that stores the id of the button. 
 
-If the action is successful, it will notify the user and call the `getEventLists` and `getBalance` functions. If it is not successful,  it will notify the user as well using the catch block for it. 
-
+If the action is successful, it will notify the user and call the `getEventLists` and `getBalance` functions. If it is not successful,  it will notify the user.
 Finally, we are going to turn off the notification.
 
-After the if statement we are going to implement two `else if` statement. The first else if will enable the user to get more details on a particular event while the second `else if` statement will enable the user to attend an event.
+After the if statement we are going to implement two `else if` statement. The first `else if` will enable the user to get more details on a particular event while the second `else if` statement will enable the user to attend an event.
 
 Let's get started with first `else if`.
 
@@ -1402,15 +1417,18 @@ document.getElementById("modalHeader").innerHTML = `
 
 ```
 
-In the code, we are going to check if the button clicked has a class name of `view`. if it is true, we will create three variables. The first is to store the id of the button, the second is to store the promise data we will be receiving later and the third is to store the list of all users that will attend that event.
+In the code, we are going to check if the button clicked has a class name of `view`. if it is true, we will create three variables:
+- The first is to store the id of the button. 
+- The second is to store the promise data we will be receiving later.
+- The third is to store the list of all users that will attend that event.
 
 Next, we are going to use a try block to call two functions `getEventById` and `getAttendees` from our smart contract and store them, then we create a variable that will get the id of our modal in the index.html file and set it to show.
 
 The `getEventById` result comes the way they are arranged in the smart contract. Before displaying the result to the user, we need to convert the timestamp gotten to a readable date format.
 
-Next, we are going to display the data of the result gotten in a modal. The modal contains a div with bootstrap classes,  and each result is mapped to a particular HTML element.
+Next, we are going to display the data of the result gotten in a modal. The modal contains a `div` with bootstrap classes,  and each result is mapped to a particular HTML element.
 
-Further, we will check if the attendee array is not empty. If true it will append the addresses of the attendees as icons in the modal. else it will display a text saying `"no attendee yet..."`.
+Further, we will check if the attendee array is not empty. If true, it will append the addresses of the attendees as icons in the modal. else it will display a text saying `"no attendee yet..."`.
 
 After the try block, we will use our catch block to handle any errors and notify the users.
 
@@ -1446,7 +1464,7 @@ The first line checks if the button clicked by the users has a class name of `at
 
 Next, we use the try block to interact with our smart contract method `addEventAttendees` which adds the address of a user to an array. If the transaction is successful it will also notify the user. Errors are caught by the catch block and displayed to the user by notification. 
 
-After everything is processed,  the notification is turned off and the `getEventLists` function is called.
+After everything is processed, the notification is turned off and the `getEventLists` function is called.
 
 Below is the full code to the main.js file:
 
@@ -1807,12 +1825,12 @@ Congratulation on building your event invitation system on the Celo blockchain.
 
 ## Next step
 
-Building and deploying smart contracts on the Celo blockchain is very easy and robust. you can add more functionalities to the smart contract and User Interface we just built.
+Building and deploying smart contracts on the Celo blockchain is very easy and robust. you can add more functionalities to the smart contract and user interface we just built.
 
-You can get the source code for this tutorial here
+You can get the source code for this tutorial here.
 
 ## About the Author
 
-Chigozie Jacob is a fullstack developer who loves a building global solutions and writting technical content. You can reach me out on Twitter [here](https://twitter.com/chigoziejacob1)
+Chigozie Jacob is a fullstack developer who loves building global solutions and writing technical content. You can reach me on [Twitter](https://twitter.com/chigoziejacob1).
 
 let's gooo!
