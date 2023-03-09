@@ -1,36 +1,54 @@
-# How to build a decentralized event invitation system on the Celo blockchain using Solidity and Javascript 
+# How to Build a Decentralized Event Invitation System on the Celo Blockchain Using Solidity and JavaScript 
 
+
+## Table of Content
+- [How to Build a Decentralized Event Invitation System on the Celo Blockchain Using Solidity and JavaScript](#how-to-build-a-decentralized-event-invitation-system-on-the-celo-blockchain-using-solidity-and-javascript)
+  - [Table of Content](#table-of-content)
+  - [Introduction](#introduction)
+    - [Celo](#celo)
+    - [Learning Objectives](#learning-objectives)
+  - [Prerequisites](#prerequisites)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+  - [Section1 : Building our Smart Contract using Solidity](#section1--building-our-smart-contract-using-solidity)
+  - [Contract Deployment](#contract-deployment)
+  - [Section2: Building our Frontend for the DApp](#section2-building-our-frontend-for-the-dapp)
+  - [The HTML part of the DApp (index.html)](#the-html-part-of-the-dapp-indexhtml)
+  - [The Javascript of the DApp (main.js) file](#the-javascript-of-the-dapp-mainjs-file)
+  - [Conclusion](#conclusion)
+  - [Next step](#next-step)
+  - [About the Author](#about-the-author)
 ## Introduction
 
-Over the years, event invitation systems have moved from just normal paper to digital cards which can be used in web2 web applications. In this era of web3 development, why not build a decentralized system that will invite people to an event on the blockchain? Celo is one of the fast leading blockchains and in our tutorial will be building our app on Celo.
+Over the years, event invitation systems have moved from just normal paper to digital cards which can be used in web2 web applications. In this era of web3 development, why not build a decentralized system that will invite people to an event on the blockchain? Celo is one of the fast leading blockchains and in our tutorial we will be building our dapp on Celo.
 
 ### Celo
 
 Celo is a blockchain project focused on making crypto payments as easy as possible. Instead of having to manage complex crypto addresses, users can send cryptocurrencies using mobile phone numbers. 
 
-Sending the platform’s stablecoin, Celo Dollars is even possible for users who do not have the Celo app. Users can send value via WhatsApp too. To access this value, however, recipients would eventually need to download the application.
+Sending the platform’s stablecoin, Celo Dollars(cUSD) is even possible for users who do not have the Valora app. Users can send value via WhatsApp too. To access this value, however, recipients would eventually need to download the application.
  
-### What will you get from this tutorial 
+### Learning Objectives
 
-1. You will learn how to write smart contract using Solidity.
-2. Deploy the smart contract on the Celo blockchain using Remix IDE.
-3. Build a User Interface using `HTML` and `Javascript` to interact with our smart contract.
+1. You will learn how to write smart contracts using Solidity.
+2. Deploy the smart contract on the Celo blockchain using the Remix IDE.
+3. Build a User Interface using `HTML` and `JavaScript` to interact with our smart contract.
 
 ## Prerequisites
 
-Before procceding with this tutorial you need to have the following basic knowledge on:
+Before proceeding with this tutorial you need to have the following basic knowledge:
 
 -  Blockchain.
 -  Smart contract development.
 -  Solidity.
 -  Remix IDE.
--  How to use the git CLI (Command Line Interface).
--  HTML and Javascript.
+-  How to use the Git CLI (Command Line Interface).
+-  HTML and JavaScript.
 
 ## Requirements
 
 - A good web browser and an internet connection.
-- **[NodeJS](https://nodejs.org/en/download)**.
+- **[Node.js](https://nodejs.org/en/download)**.
 - A code editor. **[VSCode](https://code.visualstudio.com/download)** is recommended.
 - A terminal. **[Git Bash](https://git-scm.com/downloads)** is recommended.
 - **[Remix](https://remix.ethereum.org)**
@@ -52,7 +70,7 @@ This is a preview of the Remix IDE:
 
 On the Remix IDE, click on the `contracts` folder. That is the place we will write all our smart contracts. 
 
-Next inside the contract folder, let's create our smart contract file called `CeAffairs` with the solidity extension `.sol`. 
+Next, inside the `contracts` folder, let's create our smart contract file called `CeAffairs` with the Solidity extension `.sol`. 
 
 Our first line of code for the smart contract is:
 
@@ -61,27 +79,29 @@ Our first line of code for the smart contract is:
 pragma solidity >=0.7.0 <0.9.0;
 ```
 
-The SPDX (Software Package Data Exchange) is a simple way to state the license that applies to a source code or documentation file, in our case `MIT`. 
+The [SPDX](https://spdx.dev/) (Software Package Data Exchange) is a simple way to state the license that applies to a source code or documentation file, in our case `MIT`. 
             
-The `pragma` specify the Solidity version we want the compiler to use. We would want the version to be between `0.7.0` and `0.9.0`. 
+The `pragma` specify the Solidity version we want the compiler to use. We would want the version to be equal to or greater than version`0.7.0` but less than version `0.9.0`. 
 
 Next, let's create our contract by using the keyword `contract` followed by the contract name, in our case `CeAffairs`.  
 
 
 ```solidity
 contract CeAffairs{
-// Declaring variables.
-    uint internal eventLength = 0; 
+    // Declaring variables.
+    uint internal eventLength = 0;
+
+} 
 ```
 
 In the above code, we are going to declare a variable called `eventLength` of data type `uint` with visibility set to `internal` because we want the variable to be accessed only in our smart contract.
 
-The variable is going to keep track of events that are hosted on the smart contract.
+The variable is going to keep track of the number of events that are hosted on the smart contract.
 
 Up next, we are going to create a `struct` called `Event`. Structs are a collection of variables that can consist of different data types.
 
 ```solidity 
-// Ceating a struct to store event details.
+  // Struct to store an event details.
   struct Event {
       address  owner;
       string eventName;
@@ -90,75 +110,128 @@ Up next, we are going to create a `struct` called `Event`. Structs are a collect
       uint   eventDate;
       string eventTime;
       string eventLocation;
+  }
 ```
 
-In our code above, the our struct consist of the following variables:
+In our code above, our struct consists of the following variables:
 
-1. `owner` : it stores the address of an event owner and its of data type `address`.
-2. `eventName`: it stores the name of the event and its of data type `string`.
-3. `eventCardImgUrl` : it stores the event card image and its of data type `string`.
-4. `eventDetails` : it stores the details of the event and its of data type `string`.
-5. `eventDate` : it stores the event date and its of data type `uint`.
-6. `eventTime` : it stores the event time and its of data type `string`.
-7. `eventLocation` : it stores the event location and its of data type `string`.
+1. `owner`: it stores the address of an event owner of data type `address`.
+2. `eventName`: it stores the name of the event of data type `string`.
+3. `eventCardImgUrl`: it stores the event card image of data type `string`.
+4. `eventDetails`: it stores the details of the event of data type `string`.
+5. `eventDate`: it stores the event date of data type `uint`.
+6. `eventTime`: it stores the event time of data type `string`.
+7. `eventLocation`: it stores the event location of data type `string`.
 
-After creating our Event struct, we need to create 3 `mapping`. To store multiple values. A `mapping` is like an object in Javascript that has a key and value.
+After creating our `Event` struct, we need to create three `mappings` to store data in the key-value pairs format. A `mapping` is essentially a hash table that stores data in key-value pairs where the key can be any of the built-in data types supported by Solidity.
 
 To create a `mapping`, you use the keyword `mapping` and assign a key type to a value type.
 
 ```solidity
-    //map for storing events.
-    mapping (uint => Event) internal events;
+    // Hash table for storing events.
+    mapping(uint => Event) internal events;
 
-    //map for storing list of attendees
+    // Hash table for storing list of attendees
     mapping(uint256 => address[]) internal eventAttendees;
 
-    // map for attendance check
+    // Hash table for attendance check of events
     mapping(uint => mapping(address => bool)) public attendanceCheck;
 ```
 
-- The first `mapping` stores multiple events listed on the blockchain. Your key would be an integer `uint` and the value would be the struct `Event` and the variable is `events`.
+- The first `mapping` stores multiple events listed on the blockchain. Your key would be a `uint` and the value would be the struct `Event` and the variable name would be `events`.
 
-- The second `mapping` stores the addresses of users that are going to attend a particular event. The key is the integer `uint256`, while the value is an array that stores only the addresses of the users.
+- The second `mapping` stores the addresses of users that are going to attend a particular event. The key is a `uint256`, while the value is an array that stores only the addresses of the users.
 
-- The third `mapping` checks if a user is already an attendee of a particular event to avoid spamming an event.
+- The third `mapping` stores the addresses of users that have confirmed their attendance at an event. The key is of type `uint` while the value is a nested `mapping` with a key type of `address` and value of type `bool`. 
 
-Next, we are going to create a function where a user can create or list an event on the blockchain. 
+Next, we are going to create the `createEvent()` where a user can create and list an event on the blockchain. 
 
 ```solidity
-   // Function to create  an event.
-    function createEvent(string memory _eventName, string memory _eventCardImgUrl,
-    string memory _eventDetails, uint  _eventDate, 
-    string memory _eventTime, string memory _eventLocation) public {
-        events[eventLength] = Event({owner : msg.sender, eventName: _eventName, eventCardImgUrl : _eventCardImgUrl, 
-     eventDetails: _eventDetails, eventDate : _eventDate, 
-     eventTime : _eventTime, eventLocation : _eventLocation});
-     eventLength++;
-}
+    /**
+     * @dev Validation checks are performed to prevent empty arguments for the input data
+     * @notice allow users to create and host an event
+     * @param _eventName The name of the event
+     * @param _eventCardImgUrl The image URL of an event
+     * @param _eventDetails The details of an event
+     * @param _eventDate The date of an event
+     * @param _eventTime A string for the event time
+     * @param _eventLocation The location of an event
+     */
+    function createEvent(
+        string memory _eventName,
+        string memory _eventCardImgUrl,
+        string memory _eventDetails,
+        uint _eventDate,
+        string memory _eventTime,
+        string memory _eventLocation
+    ) public {
+        require(bytes(_eventName).length > 0, "Empty event name.");
+        require(bytes(_eventCardImgUrl).length > 0, "Empty event image URL.");
+        require(bytes(_eventDetails).length > 0, "Empty event details.");
+        require(bytes(_eventLocation).length > 0, "Empty event location.");
+        require(
+            _eventDate > block.timestamp + 600,
+            "Event time needs to be at least ten mins greater than the current timestamp"
+        );
+        require(bytes(_eventTime).length == 5, "Invalid time format");
+        events[eventLength] = Event({
+            owner: msg.sender,
+            eventName: _eventName,
+            eventCardImgUrl: _eventCardImgUrl,
+            eventDetails: _eventDetails,
+            eventDate: _eventDate,
+            eventTime: _eventTime,
+            eventLocation: _eventLocation
+        });
+        eventLength++;
+    }
 ```
 
-The function above takes six parameters which are `_eventName`, `_eventCardImgUrl`, `_eventDetails`, `_eventDate`, `_eventTime`, and `_eventLocation`. The parameter has a prefix `_` which is used to differentiate it from its struct value. The function has its visibility type set to public.  
+The function above takes six parameters which are:
+1. `_eventName`
+2. `_eventCardImgUrl`
+3. `_eventDetails`
+4. `_eventDate`
+5. `_eventTime`
+6. `_eventLocation`
+  
+>**_Note_**: Notice that the parameters have a prefix `_` that is used to *differentiate* them from their struct counterpart but also to make clear that those variables can only be used inside the function body. The function has its *visibility* type set to *public*.  
 
-A new event is then added to the events `mapping` by using the initial length of the event which we created above called `eventLength` as a key to store a new Event struct with the specified information. The owner of the event is stored using the `msg.sender` keyword, then we increment the `eventLength` by 1 for the next event to be created.
+The function first carries out the following checks:
 
-Up next, we are going to create a function that will return the information of a particular event when the `_index` of that event is being passed. The function will be declared `public view` meaning that it is going to be public and we not modifying anything rather we are only to return some values. 
+1. Ensures the argument for `_eventName` is not an empty string
+2. Ensures the argument for `_eventCardImgUrl` is not an empty string
+3. Ensures the argument for `_eventDetails` is not an empty string
+4. Ensures the argument for `_eventDate` is at least a timestamp that is **ten minutes** greater than the current **block timestamp**
+5. Ensures the argument for `_eventTime` follows the valid `string` format `hh:mm`
+6. Ensures the argument for `_eventLocation` is not an empty string
+
+A new event is then added to the events `mapping` by using the current number of events created which is stored inside `eventLength` as a key to store a new `Event` struct with the specified information. The owner of the event is stored using the `msg.sender` keyword, then we increment the `eventLength` by one for the next event to be created.
+
+Up next, we are going to create the `getEventById()` function that will *return* the information of a particular event when the `_index` of that event is passed. The function will be declared `public` and `view` meaning that it can be called `internally` and `externally` and can only read but not modify the state of the smart contract.
 
 ```solidity
-    // Function to get a event through its id.
-    function getEventById(uint _index) public view returns (
-        address,
-        string memory,
-        string memory,
-        string memory,
-        uint,
-        string memory,
-        string memory
-        
-    ) {
-    
+     * @param _index the index of the Event
+     * @return Array An array containing the data of an Event struct at an index
+     */
+    function getEventById(
+        uint _index
+    )
+        public
+        view
+        returns (
+            address,
+            string memory,
+            string memory,
+            string memory,
+            uint,
+            string memory,
+            string memory
+        )
+    {
         return (
             events[_index].owner,
-            events[_index].eventName, 
+            events[_index].eventName,
             events[_index].eventCardImgUrl,
             events[_index].eventDetails,
             events[_index].eventDate,
@@ -169,72 +242,81 @@ Up next, we are going to create a function that will return the information of a
 
 ```
 
-The function will return the address of the `owner`, `eventName`, `eventCardImgUrl`, `eventDetails`, `eventDate`, `eventTime` and the `eventLocation`.
+The function will return an `array` containing the values of the `Event` struct stored at `_index`.
 
-Up next, we are going to create a function called `deleteEventById` that will allow an event owner deletes his or her event.  
+Up next, we are going to create a function called `deleteEventById()` that will allow an event owner to delete his or her event.  
 
 ```solidity
-
-    //Function in which only an event owner can delete an event. 
-function deleteEventById(uint _index) public {
+    /// @notice Function where only a event owner can delete an event.
+    function deleteEventById(uint _index) public {
         require(msg.sender == events[_index].owner, "you are not the owner");
         delete events[_index];
     }
-
 ```
 
-The function takes a parameter `_index` and it's set to public. The body of the function uses the `require` method. The `require` method is used to ensure that a particular condition is being met before moving to the next line of code. 
+The function takes a parameter `_index` and it's set to `public`. The body of the function uses the `require` method which is used to ensure that a particular condition is being met before moving on to the next line of code. 
 
-In our `require` method, we are going to ensure that the address of the user calling the function is the owner of that event. If the condition is false, it will throw an error with the keyword `"you are not the owner"`. If the condition is true,  it will delete the event in the events `mapping` through its index.
+In our `require` method, we are going to ensure that the `address` of the user calling the function is the owner of that event. If the condition is *false*, it will throw an error with the message "you are not the owner"`. If the condition is *true*,  it will delete the `Event` struct stored at `_index`.
 
-Up next we are going to create a function called `addEventAttendees` which will enable a user to attend an event without spamming it.
+Up next we are going to create a function called `addEventAttendees()` which will enable a user to attend an event without spamming it.
 
 ```solidity
-
-//Function to attend an event without spamming it.
+    /**
+     * @dev Users can attend an event that hasn't yet started and can only confirm their attendance once
+     * @notice Function to attend an event
+     * @param _index the index of the Event
+     */
     function addEventAttendees(uint256 _index) public {
-        require(events[_index].eventDate > block.timestamp,"sorry entry date has expired...");
-        require(!attendanceCheck[_index][msg.sender], "you are already an attendee");
+        require(
+            events[_index].eventDate > block.timestamp,
+            "sorry entry date has expired..."
+        );
+        require(
+            !attendanceCheck[_index][msg.sender],
+            "you are already an attendee"
+        );
         attendanceCheck[_index][msg.sender] = true;
         eventAttendees[_index].push(msg.sender);
-    
     }
-}
 
 ``` 
 
-The function takes parameters `_index` and its `visibility` is set to public. 
+The function takes a parameter `_index` and its `visibility` is set to `public`. 
 
 It uses two `require` methods. The first `require` method ensures that the entry date of that particular event has not expired by making a comparison with the current timestamp. 
 
-The second `require` method is to ensure the attendance check of a user is false. 
+The second `require` method is to ensure the attendance check of a user is `false`. 
 
-If the two `require` conditions are being met, it sets the `attendanceCheck` of that user to be true and stores the user `address` in an array that is stored in a `mapping`.
+If the two `require` conditions are being met, it sets the `attendanceCheck` of that user to be `true` and stores the user `address` in an array that is stored in the `eventAttendees` mapping.
 
-Up next we are going to create a function called `getAttendees` to fetch the list of all attendees of a particular event.
+Up next we are going to create a function called `getAttendees()` to fetch the list of all attendees of a particular event.
 
 ```solidity
+    /**
+     *  @return Array An array of addresses attending an event at Index
+     * @param _index the index of the Event
+     */
 
-//function to get list of event attendees by event id.
-    function getAttendees(uint256 _index) public view returns (address[] memory) {
+    function getAttendees(
+        uint256 _index
+    ) public view returns (address[] memory) {
         return eventAttendees[_index];
     }
-
 ``` 
 
-The function takes a parameter of `_index` and its visibility is set to public view since we are not modifying anything and it returns an array of type `address`.
+The function takes a parameter of `_index` and its visibility is set to `public` and `view` since we are not modifying anything and it returns an array of type `address`.
 
 The body of the function returns an array of addresses by using the `_index` as a key.
 
-Up next, we are going to create a public function called `getEventLength` that will return the number of `events` created.
+Up next, we are going to create a public function called `getEventLength()` that will return the number of `events` created.
 
 ```solidity
-
-//function to get length of event.
+    /**
+     *  @return uint A uint representing the number of events hosted on the smart contract
+     */
     function getEventLength() public view returns (uint) {
         return (eventLength);
     }
-
 ```
 
 Here is the full code:
@@ -242,60 +324,92 @@ Here is the full code:
 ```solidity
 
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.3;
+pragma solidity >=0.7.0 <0.9.0;
 
-contract CeAffairs{
-// Declaring variables.
+contract CeAffairs {
+    // Declaring variables.
     uint internal eventLength = 0;
-    
-    // Ceating a struct to store event details.
+
+    // Struct to store an event details.
     struct Event {
-        address  owner;
+        address owner;
         string eventName;
         string eventCardImgUrl;
         string eventDetails;
-        uint   eventDate;
+        uint eventDate;
         string eventTime;
         string eventLocation;
-        
     }
+    // Hash table for storing events.
+    mapping(uint => Event) internal events;
 
-    //map for storing events.
-    mapping (uint => Event) internal events;
-
-    //map for storing list of attendees
+    // Hash table for storing list of attendees
     mapping(uint256 => address[]) internal eventAttendees;
 
-    // map for attendance check
+    // Hash table for attendance check of events
     mapping(uint => mapping(address => bool)) public attendanceCheck;
 
+    /**
+     * @dev Validation checks are performed to prevent empty arguments for the input data
+     * @notice allow users to create and host an event
+     * @param _eventName The name of the event
+     * @param _eventCardImgUrl The image URL of an event
+     * @param _eventDetails The details of an event
+     * @param _eventDate The date of an event
+     * @param _eventTime A string for the event time
+     * @param _eventLocation The location of an event
+     */
+    function createEvent(
+        string memory _eventName,
+        string memory _eventCardImgUrl,
+        string memory _eventDetails,
+        uint _eventDate,
+        string memory _eventTime,
+        string memory _eventLocation
+    ) public {
+        require(bytes(_eventName).length > 0, "Empty event name.");
+        require(bytes(_eventCardImgUrl).length > 0, "Empty event image URL.");
+        require(bytes(_eventDetails).length > 0, "Empty event details.");
+        require(bytes(_eventLocation).length > 0, "Empty event location.");
+        require(
+            _eventDate > block.timestamp + 600,
+            "Event time needs to be at least ten mins greater than the current timestamp"
+        );
+        require(bytes(_eventTime).length == 5, "Invalid time format");
+        events[eventLength] = Event({
+            owner: msg.sender,
+            eventName: _eventName,
+            eventCardImgUrl: _eventCardImgUrl,
+            eventDetails: _eventDetails,
+            eventDate: _eventDate,
+            eventTime: _eventTime,
+            eventLocation: _eventLocation
+        });
+        eventLength++;
+    }
 
-    // Function to create  an event.
-    function createEvent(string memory _eventName, string memory _eventCardImgUrl,
-    string memory _eventDetails, uint  _eventDate, 
-    string memory _eventTime, string memory _eventLocation) public {
-        events[eventLength] = Event({owner : msg.sender, eventName: _eventName, eventCardImgUrl : _eventCardImgUrl, 
-     eventDetails: _eventDetails, eventDate : _eventDate, 
-     eventTime : _eventTime, eventLocation : _eventLocation});
-     eventLength++;
-}
-
-
-// Function to get a event through its id.
-    function getEventById(uint _index) public view returns (
-        address,
-        string memory,
-        string memory,
-        string memory,
-        uint,
-        string memory,
-        string memory
-        
-    ) {
-    
+    /**
+     * @param _index the index of the Event
+     * @return Array An array containing the data of an Event struct at an index
+     */
+    function getEventById(
+        uint _index
+    )
+        public
+        view
+        returns (
+            address,
+            string memory,
+            string memory,
+            string memory,
+            uint,
+            string memory,
+            string memory
+        )
+    {
         return (
             events[_index].owner,
-            events[_index].eventName, 
+            events[_index].eventName,
             events[_index].eventCardImgUrl,
             events[_index].eventDetails,
             events[_index].eventDate,
@@ -304,36 +418,51 @@ contract CeAffairs{
         );
     }
 
-//Function only a event owner can delete an event. 
-function deleteEventById(uint _index) public {
+    /// @notice Function where only a event owner can delete an event.
+    function deleteEventById(uint _index) public {
         require(msg.sender == events[_index].owner, "you are not the owner");
         delete events[_index];
     }
 
-//Function to attend an event without spamming it.
+    /**
+     * @dev Users can attend an event that hasn't yet started and can only confirm their attendance once
+     * @notice Function to attend an event
+     * @param _index the index of the Event
+     */
     function addEventAttendees(uint256 _index) public {
-        require(events[_index].eventDate > block.timestamp,"sorry entry date has expired...");
-        require(!attendanceCheck[_index][msg.sender], "you are already an attendee");
+        require(
+            events[_index].eventDate > block.timestamp,
+            "sorry entry date has expired..."
+        );
+        require(
+            !attendanceCheck[_index][msg.sender],
+            "you are already an attendee"
+        );
         attendanceCheck[_index][msg.sender] = true;
         eventAttendees[_index].push(msg.sender);
-    
     }
 
-//function to get list of event attendees by event id.
-    function getAttendees(uint256 _index) public view returns (address[] memory) {
+    /**
+     *  @return Array An array of addresses attending an event at Index
+     * @param _index the index of the Event
+     */
+
+    function getAttendees(
+        uint256 _index
+    ) public view returns (address[] memory) {
         return eventAttendees[_index];
     }
 
-
-//function to get length of event.
+    /**
+     *  @return uint A uint representing the number of events hosted on the smart contract
+     */
     function getEventLength() public view returns (uint) {
         return (eventLength);
-    }    
-
+    }
 }
- 
+
 ```
-Congrats! you just created your event smart contract.
+Congrats! you just created an event invitation smart contract.
 
 Up next is to deploy that smart contract on the Celo blockchain.
 
