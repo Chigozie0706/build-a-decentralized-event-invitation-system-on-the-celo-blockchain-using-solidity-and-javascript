@@ -188,12 +188,12 @@ Next, we are going to create the `createEvent()` where a user can create and lis
 ```
 
 The function above takes six parameters which are:
-1. `_eventName`
-2. `_eventCardImgUrl`
-3. `_eventDetails`
-4. `_eventDate`
-5. `_eventTime`
-6. `_eventLocation`
+1. `_eventName` - An event name
+2. `_eventCardImgUrl` - An event image URL
+3. `_eventDetails` - An event details
+4. `_eventDate` - A `uint` for the date of an event
+5. `_eventTime` - A `string` in the format `hh:mm` for the time of an event
+6. `_eventLocation` - An event location
   
 >**_Note_**: Notice that the parameters have a prefix `_` that is used to *differentiate* them from their struct counterpart but also to make clear that those variables can only be used inside the function body. The function has its *visibility* type set to *public*.  
 
