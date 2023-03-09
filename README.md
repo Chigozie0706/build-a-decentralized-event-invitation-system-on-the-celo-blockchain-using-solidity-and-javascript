@@ -4,6 +4,24 @@
 
 Over the years, event invitation systems have moved from just normal paper to digital cards which can be used in web2 web applications. In this era of web3 development, why not build a decentralized system that will invite people to an event on the blockchain such as Celo? Celo is one of the fast leading blockchains and in our tutorial will be building our app on Celo.
 
+## Table of Contents
+  * [Introduction](#introduction)
+  * [Table of Contents](#table-of-contents)
+  * [What is the Celo Blockcchain](#what-is-the-celo-blockcchain)
+  * [What will you get from this tutorial](#what-will-you-get-from-this-tutorial)
+  * [Prerequisites](#prerequisites)
+  * [Requirements](#requirements)
+  * [Getting Started](#getting-started)
+  * [Section 1: Building Our Smart Contract Using Solidity](#section-1-building-our-smart-contract-using-solidity)
+    + [Contract Deployment](#contract-deployment)
+  * [Section 2: Building Our Frontend for the DApp](#section-2-building-our-frontend-for-the-dapp)
+    + [The HTML part of the DApp (index.html)](#the-html-part-of-the-dapp-indexhtml)
+    + [The Javascript of the DApp (main.js)](#the-javascript-of-the-dapp-mainjs)
+  * [Conclusion](#conclusion)
+  * [Next step](#next-step)
+  * [About the Author](#about-the-author)
+
+
 ## What is the Celo Blockcchain
 
 Celo is a blockchain project focused on making crypto payments as easy as possible. Instead of having to manage complex crypto addresses, users can send cryptocurrencies using mobile phone numbers. 
