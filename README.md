@@ -60,7 +60,7 @@ Here is a demo of what we are about to build:
 
 [Demo Link](https://chigozie0706.github.io/ceAffairs/)
 
-## Section one : Building Our Smart Contract Using Solidity
+## Section One: Building Our Smart Contract Using Solidity
 
 In this section, we will build our smart contract for the blockchain using Solidity. Before going into details we need to be on the Remix IDE. Click [here](http://remix.ethereum.org/) to navigate to Remix.
 
